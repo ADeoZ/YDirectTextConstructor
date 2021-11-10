@@ -1,70 +1,17 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeField } from "../reducers/adFormSlice";
 
 export default function AdsForm() {
-  const clearForm = {
-    header: "",
-    extraheader: "",
-    text: "",
-    url: "",
-    showurl: "",
-    callout1: "",
-    callout2: "",
-    callout3: "",
-    callout4: "",
-    sitelink1name: "",
-    sitelink2name: "",
-    sitelink3name: "",
-    sitelink4name: "",
-    sitelink5name: "",
-    sitelink6name: "",
-    sitelink7name: "",
-    sitelink8name: "",
-    sitelink1link: "",
-    sitelink2link: "",
-    sitelink3link: "",
-    sitelink4link: "",
-    sitelink5link: "",
-    sitelink6link: "",
-    sitelink7link: "",
-    sitelink8link: "",
-    sitelink1descr: "",
-    sitelink2descr: "",
-    sitelink3descr: "",
-    sitelink4descr: "",
-    sitelink5descr: "",
-    sitelink6descr: "",
-    sitelink7descr: "",
-    sitelink8descr: "",
-  };
-  //   const clearLength = { header: 0, extraheader: 0, sumheader: 0 };
-  //   const clearStyles = { header: true, extraheader: true };
-  const [form, setForm] = useState(clearForm);
-  const [extSitelinks, setExtSitelinks] = useState(false);
-  //   const [length, setLength] = useState(clearLength);
-  //   const [styles, setStyles] = useState(clearStyles);
+  const form = useSelector((state) => state.adForm);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setForm((prevState) => ({ ...prevState, [name]: value }));
-    // calculateLength(name, value);
+    dispatch(changeField({ name, value }));
   };
 
-  //   const calculateLength = (input, value) => {
-  //     let valueLength = value.length;
-
-  //     if (input === "header") {
-  //       setLength((prevState) => ({ ...prevState, sumheader: form.extraheader.length + valueLength }));
-  //       setStyles((prevState) => ({ ...prevState, header: valueLength <= 56 }));
-  //     }
-  //     if (input === "extraheader") {
-  //       setLength((prevState) => ({ ...prevState, sumheader: form.gheader.length + valueLength }));
-  //       valueLength = value.replace(/[.,"!;:]/g, "").length;
-  //       setStyles((prevState) => ({ ...prevState, extraheader: valueLength <= 30 }));
-  //     }
-
-  //     setLength((prevState) => ({ ...prevState, [input]: valueLength }));
-  //   };
-
+  const [extSitelinks, setExtSitelinks] = useState(false);
   const showExtSitelinks = () => setExtSitelinks(!extSitelinks);
 
   return (
@@ -207,15 +154,15 @@ export default function AdsForm() {
           {form.callout1.length + form.callout2.length + form.callout3.length + form.callout4.length}
         </span>
       </div>
-      <label className="AdsForm__label" htmlFor="callout1">
+      <label className="AdsForm__label" htmlFor="callout_1">
         №1
       </label>
       <div className="AdsForm__subdescription">До 25 символов</div>
       <div className="AdsForm__line">
         <input
           className={form.callout1.length <= 25 ? "AdsForm__input" : "AdsForm__input AdsForm__input-warn"}
-          name="callout1"
-          id="callout1"
+          name="callout_1"
+          id="callout_1"
           value={form.callout1}
           onChange={handleChange}
         />
@@ -223,15 +170,15 @@ export default function AdsForm() {
           {form.callout1.length}
         </div>
       </div>
-      <label className="AdsForm__label" htmlFor="callout2">
+      <label className="AdsForm__label" htmlFor="callout_2">
         №2
       </label>
       <div className="AdsForm__subdescription">До 25 символов</div>
       <div className="AdsForm__line">
         <input
           className={form.callout2.length <= 25 ? "AdsForm__input" : "AdsForm__input AdsForm__input-warn"}
-          name="callout2"
-          id="callout2"
+          name="callout_2"
+          id="callout_2"
           value={form.callout2}
           onChange={handleChange}
         />
@@ -239,15 +186,15 @@ export default function AdsForm() {
           {form.callout2.length}
         </div>
       </div>
-      <label className="AdsForm__label" htmlFor="callout3">
+      <label className="AdsForm__label" htmlFor="callout_3">
         №3
       </label>
       <div className="AdsForm__subdescription">До 25 символов</div>
       <div className="AdsForm__line">
         <input
           className={form.callout3.length <= 25 ? "AdsForm__input" : "AdsForm__input AdsForm__input-warn"}
-          name="callout3"
-          id="callout3"
+          name="callout_3"
+          id="callout_3"
           value={form.callout3}
           onChange={handleChange}
         />
@@ -255,15 +202,15 @@ export default function AdsForm() {
           {form.callout3.length}
         </div>
       </div>
-      <label className="AdsForm__label" htmlFor="callout4">
+      <label className="AdsForm__label" htmlFor="callout_4">
         №4
       </label>
       <div className="AdsForm__subdescription">До 25 символов</div>
       <div className="AdsForm__line">
         <input
           className={form.callout4.length <= 25 ? "AdsForm__input" : "AdsForm__input AdsForm__input-warn"}
-          name="callout4"
-          id="callout4"
+          name="callout_4"
+          id="callout_4"
           value={form.callout4}
           onChange={handleChange}
         />
@@ -298,19 +245,19 @@ export default function AdsForm() {
       №1
       <div className="AdsForm__line AdsForm__sitelinks-headers">
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink1name">
+          <label className="AdsForm__label" htmlFor="sitelink_1_name">
             Заголовок
           </label>
           <div className="AdsForm__subdescription">До 30 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink1descr">
+          <label className="AdsForm__label" htmlFor="sitelink_1_descr">
             Описание
           </label>
           <div className="AdsForm__subdescription">До 60 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink1link">
+          <label className="AdsForm__label" htmlFor="sitelink_1_link">
             Ссылка на сайт
           </label>
           <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -323,8 +270,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink1name"
-          id="sitelink1name"
+          name="sitelink_1_name"
+          id="sitelink_1_name"
           value={form.sitelink1name}
           onChange={handleChange}
         />
@@ -343,8 +290,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink1descr"
-          id="sitelink1descr"
+          name="sitelink_1_descr"
+          id="sitelink_1_descr"
           value={form.sitelink1descr}
           onChange={handleChange}
         />
@@ -363,8 +310,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink1link"
-          id="sitelink1link"
+          name="sitelink_1_link"
+          id="sitelink_1_link"
           value={form.sitelink1link}
           onChange={handleChange}
         />
@@ -381,19 +328,19 @@ export default function AdsForm() {
       №2
       <div className="AdsForm__line AdsForm__sitelinks-headers">
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink2name">
+          <label className="AdsForm__label" htmlFor="sitelink_2_name">
             Заголовок
           </label>
           <div className="AdsForm__subdescription">До 30 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink2descr">
+          <label className="AdsForm__label" htmlFor="sitelink_2_descr">
             Описание
           </label>
           <div className="AdsForm__subdescription">До 60 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink2link">
+          <label className="AdsForm__label" htmlFor="sitelink_2_link">
             Ссылка на сайт
           </label>
           <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -406,8 +353,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink2name"
-          id="sitelink2name"
+          name="sitelink_2_name"
+          id="sitelink_2_name"
           value={form.sitelink2name}
           onChange={handleChange}
         />
@@ -426,8 +373,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink2descr"
-          id="sitelink2descr"
+          name="sitelink_2_descr"
+          id="sitelink_2_descr"
           value={form.sitelink2descr}
           onChange={handleChange}
         />
@@ -446,8 +393,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink2link"
-          id="sitelink2link"
+          name="sitelink_2_link"
+          id="sitelink_2_link"
           value={form.sitelink2link}
           onChange={handleChange}
         />
@@ -464,19 +411,19 @@ export default function AdsForm() {
       №3
       <div className="AdsForm__line AdsForm__sitelinks-headers">
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink3name">
+          <label className="AdsForm__label" htmlFor="sitelink_3_name">
             Заголовок
           </label>
           <div className="AdsForm__subdescription">До 30 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink3descr">
+          <label className="AdsForm__label" htmlFor="sitelink_3_descr">
             Описание
           </label>
           <div className="AdsForm__subdescription">До 60 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink3link">
+          <label className="AdsForm__label" htmlFor="sitelink_3_link">
             Ссылка на сайт
           </label>
           <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -489,8 +436,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink3name"
-          id="sitelink1name"
+          name="sitelink_3_name"
+          id="sitelink_3_name"
           value={form.sitelink3name}
           onChange={handleChange}
         />
@@ -509,8 +456,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink3descr"
-          id="sitelink3descr"
+          name="sitelink_3_descr"
+          id="sitelink_3_descr"
           value={form.sitelink3descr}
           onChange={handleChange}
         />
@@ -529,8 +476,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink3link"
-          id="sitelink3link"
+          name="sitelink_3_link"
+          id="sitelink_3_link"
           value={form.sitelink3link}
           onChange={handleChange}
         />
@@ -547,19 +494,19 @@ export default function AdsForm() {
       №4
       <div className="AdsForm__line AdsForm__sitelinks-headers">
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink4name">
+          <label className="AdsForm__label" htmlFor="sitelink_4_name">
             Заголовок
           </label>
           <div className="AdsForm__subdescription">До 30 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink4descr">
+          <label className="AdsForm__label" htmlFor="sitelink_4_descr">
             Описание
           </label>
           <div className="AdsForm__subdescription">До 60 символов</div>
         </div>
         <div className="AdsForm__sitelinks-header">
-          <label className="AdsForm__label" htmlFor="sitelink4link">
+          <label className="AdsForm__label" htmlFor="sitelink_4_link">
             Ссылка на сайт
           </label>
           <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -572,8 +519,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink4name"
-          id="sitelink4name"
+          name="sitelink_4_name"
+          id="sitelink_4_name"
           value={form.sitelink4name}
           onChange={handleChange}
         />
@@ -592,8 +539,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink4descr"
-          id="sitelink4descr"
+          name="sitelink_4_descr"
+          id="sitelink_4_descr"
           value={form.sitelink4descr}
           onChange={handleChange}
         />
@@ -612,8 +559,8 @@ export default function AdsForm() {
               ? "AdsForm__input AdsForm__input-sitelinks"
               : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
           }
-          name="sitelink4link"
-          id="sitelink4link"
+          name="sitelink_4_link"
+          id="sitelink_4_link"
           value={form.sitelink4link}
           onChange={handleChange}
         />
@@ -654,19 +601,19 @@ export default function AdsForm() {
           №5
           <div className="AdsForm__line AdsForm__sitelinks-headers">
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink5name">
+              <label className="AdsForm__label" htmlFor="sitelink_5_name">
                 Заголовок
               </label>
               <div className="AdsForm__subdescription">До 30 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink5descr">
+              <label className="AdsForm__label" htmlFor="sitelink_5_descr">
                 Описание
               </label>
               <div className="AdsForm__subdescription">До 60 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink5link">
+              <label className="AdsForm__label" htmlFor="sitelink_5_link">
                 Ссылка на сайт
               </label>
               <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -679,8 +626,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink5name"
-              id="sitelink5name"
+              name="sitelink_5_name"
+              id="sitelink_5_name"
               value={form.sitelink5name}
               onChange={handleChange}
             />
@@ -699,8 +646,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink5descr"
-              id="sitelink5descr"
+              name="sitelink_5_descr"
+              id="sitelink_5_descr"
               value={form.sitelink5descr}
               onChange={handleChange}
             />
@@ -719,8 +666,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink5link"
-              id="sitelink5link"
+              name="sitelink_5_link"
+              id="sitelink_5_link"
               value={form.sitelink5link}
               onChange={handleChange}
             />
@@ -737,19 +684,19 @@ export default function AdsForm() {
           №6
           <div className="AdsForm__line AdsForm__sitelinks-headers">
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink6name">
+              <label className="AdsForm__label" htmlFor="sitelink_6_name">
                 Заголовок
               </label>
               <div className="AdsForm__subdescription">До 30 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink6descr">
+              <label className="AdsForm__label" htmlFor="sitelink_6_descr">
                 Описание
               </label>
               <div className="AdsForm__subdescription">До 60 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink6link">
+              <label className="AdsForm__label" htmlFor="sitelink_6_link">
                 Ссылка на сайт
               </label>
               <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -762,8 +709,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink6name"
-              id="sitelink6name"
+              name="sitelink_6_name"
+              id="sitelink_6_name"
               value={form.sitelink6name}
               onChange={handleChange}
             />
@@ -782,8 +729,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink6descr"
-              id="sitelink6descr"
+              name="sitelink_6_descr"
+              id="sitelink_6_descr"
               value={form.sitelink6descr}
               onChange={handleChange}
             />
@@ -820,19 +767,19 @@ export default function AdsForm() {
           №7
           <div className="AdsForm__line AdsForm__sitelinks-headers">
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink7name">
+              <label className="AdsForm__label" htmlFor="sitelink_7_name">
                 Заголовок
               </label>
               <div className="AdsForm__subdescription">До 30 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink7descr">
+              <label className="AdsForm__label" htmlFor="sitelink_7_descr">
                 Описание
               </label>
               <div className="AdsForm__subdescription">До 60 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink7link">
+              <label className="AdsForm__label" htmlFor="sitelink_7_link">
                 Ссылка на сайт
               </label>
               <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -845,8 +792,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink7name"
-              id="sitelink7name"
+              name="sitelink_7_name"
+              id="sitelink_7_name"
               value={form.sitelink7name}
               onChange={handleChange}
             />
@@ -865,8 +812,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink7descr"
-              id="sitelink7descr"
+              name="sitelink_7_descr"
+              id="sitelink_7_descr"
               value={form.sitelink7descr}
               onChange={handleChange}
             />
@@ -885,8 +832,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink7link"
-              id="sitelink7link"
+              name="sitelink_7_link"
+              id="sitelink_7_link"
               value={form.sitelink7link}
               onChange={handleChange}
             />
@@ -903,19 +850,19 @@ export default function AdsForm() {
           №8
           <div className="AdsForm__line AdsForm__sitelinks-headers">
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink8name">
+              <label className="AdsForm__label" htmlFor="sitelink_8_name">
                 Заголовок
               </label>
               <div className="AdsForm__subdescription">До 30 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink8descr">
+              <label className="AdsForm__label" htmlFor="sitelink_8_descr">
                 Описание
               </label>
               <div className="AdsForm__subdescription">До 60 символов</div>
             </div>
             <div className="AdsForm__sitelinks-header">
-              <label className="AdsForm__label" htmlFor="sitelink8link">
+              <label className="AdsForm__label" htmlFor="sitelink_8_link">
                 Ссылка на сайт
               </label>
               <div className="AdsForm__subdescription">До 1016 символов</div>
@@ -928,8 +875,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink8name"
-              id="sitelink8name"
+              name="sitelink_8_name"
+              id="sitelink_8_name"
               value={form.sitelink8name}
               onChange={handleChange}
             />
@@ -948,8 +895,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink8descr"
-              id="sitelink8descr"
+              name="sitelink_8_descr"
+              id="sitelink_8_descr"
               value={form.sitelink8descr}
               onChange={handleChange}
             />
@@ -968,8 +915,8 @@ export default function AdsForm() {
                   ? "AdsForm__input AdsForm__input-sitelinks"
                   : "AdsForm__input AdsForm__input-sitelinks AdsForm__input-warn"
               }
-              name="sitelink8link"
-              id="sitelink8link"
+              name="sitelink_8_link"
+              id="sitelink_8_link"
               value={form.sitelink8link}
               onChange={handleChange}
             />
