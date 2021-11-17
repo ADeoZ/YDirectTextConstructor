@@ -6,34 +6,17 @@ const initialState = {
   text: "",
   url: "",
   showurl: "",
-  callout1: "",
-  callout2: "",
-  callout3: "",
-  callout4: "",
-  sitelink1name: "",
-  sitelink2name: "",
-  sitelink3name: "",
-  sitelink4name: "",
-  sitelink5name: "",
-  sitelink6name: "",
-  sitelink7name: "",
-  sitelink8name: "",
-  sitelink1link: "",
-  sitelink2link: "",
-  sitelink3link: "",
-  sitelink4link: "",
-  sitelink5link: "",
-  sitelink6link: "",
-  sitelink7link: "",
-  sitelink8link: "",
-  sitelink1descr: "",
-  sitelink2descr: "",
-  sitelink3descr: "",
-  sitelink4descr: "",
-  sitelink5descr: "",
-  sitelink6descr: "",
-  sitelink7descr: "",
-  sitelink8descr: "",
+  callout: ["", "", "", ""],
+  sitelink: [
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+    { name: "", link: "", descr: "" },
+  ],
 };
 
 const adFormSlice = createSlice({
@@ -42,20 +25,16 @@ const adFormSlice = createSlice({
   reducers: {
     changeField: (state, action) => {
       const { name, value } = action.payload;
-      state[name] = value;
-    },
-    resetCatalogState: (state) => {
-      return initialState;
-    },
-    selectCategory: (state, action) => {
-      state.items = [];
-      state.showMore = true;
-      state.categoryId = action.payload;
-    },
-    putSearch: (state, action) => {
-      state.items = [];
-      state.showMore = true;
-      state.searchQ = action.payload;
+      const compName = name.split("_");
+      if (compName[1]) {
+        if (compName[2]) {
+          state[compName[0]][compName[1]][compName[2]] = value;
+        } else {
+          state[compName[0]][compName[1]] = value;
+        }
+      } else {
+        state[name] = value;
+      }
     },
   },
 });
