@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/YDirectTextConstructor/static/css/main.d91dd7f2.chunk.css",
+    "main.js": "/YDirectTextConstructor/static/js/main.0b1a1ed8.chunk.js",
+    "main.js.map": "/YDirectTextConstructor/static/js/main.0b1a1ed8.chunk.js.map",
+    "runtime-main.js": "/YDirectTextConstructor/static/js/runtime-main.4e421cde.js",
+    "runtime-main.js.map": "/YDirectTextConstructor/static/js/runtime-main.4e421cde.js.map",
+    "static/js/2.69ee3823.chunk.js": "/YDirectTextConstructor/static/js/2.69ee3823.chunk.js",
+    "static/js/2.69ee3823.chunk.js.map": "/YDirectTextConstructor/static/js/2.69ee3823.chunk.js.map",
+    "index.html": "/YDirectTextConstructor/index.html",
+    "static/css/main.d91dd7f2.chunk.css.map": "/YDirectTextConstructor/static/css/main.d91dd7f2.chunk.css.map",
+    "static/js/2.69ee3823.chunk.js.LICENSE.txt": "/YDirectTextConstructor/static/js/2.69ee3823.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4e421cde.js",
+    "static/js/2.69ee3823.chunk.js",
+    "static/css/main.d91dd7f2.chunk.css",
+    "static/js/main.0b1a1ed8.chunk.js"
+  ]
+}
