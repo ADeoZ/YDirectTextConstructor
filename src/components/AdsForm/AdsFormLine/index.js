@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 
 export default function AdsFormLine(props) {
@@ -14,13 +15,13 @@ export default function AdsFormLine(props) {
   return (
     <div className="AdsForm__line">
       <input
-        className={check ? "AdsForm__input" : "AdsForm__input AdsForm__input-warn"}
+        className={classNames("AdsForm__input", { "AdsForm__input-warn": !check })}
         name={field}
         id={field}
         value={form[field]}
         onChange={handleChange}
       />
-      <div className={check ? "AdsForm__info" : "AdsForm__info AdsForm__info-warn"}>
+      <div className={classNames("AdsForm__info", { "AdsForm__info-warn": !check })}>
         {reg ? form[field].replace(reg, "").length : form[field].length}
       </div>
     </div>

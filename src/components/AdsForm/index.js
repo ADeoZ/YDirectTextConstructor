@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import classNames from "classnames/bind";
 import AdsFormCallout from "./AdsFormCallout";
 import AdsFormLine from "./AdsFormLine";
 import AdsFormSitelink from "./AdsFormSitelink";
@@ -11,7 +12,7 @@ export default function AdsForm() {
     headers: { sum: { length: 56, fields: ["header", "extraheader"] } },
     text: { length: 81, reg: /[.,"!;:]/g },
     url: { length: 1024 },
-    showurl: { length: 20, forbidden: /[^a-zа-я0-9-№#/% ]/i },
+    showurl: { length: 20, forbidden: /[^a-zа-я0-9-№#/%]/i },
     callout: { length: 25 },
     callouts: { sum: { length: 66, fields: ["callout"], index: [0, 1, 2, 3] } },
     sitelink: {
@@ -69,7 +70,7 @@ export default function AdsForm() {
       <div className="AdsForm__description">
         Общая длина не более 56 символов, включая знаки препинания и пробелы
         <br />
-        <span className={checkSum("headers") ? "" : "AdsForm__description-warn"}>
+        <span className={classNames({ "AdsForm__description-warn": !checkSum("headers") })}>
           Текущая общая длина: {checkSum("headers", true)}
         </span>
       </div>
@@ -106,7 +107,9 @@ export default function AdsForm() {
       <div className="AdsForm__subdescription">
         До 20 символов.{" "}
         <span
-          className={!form.showurl.match(FIELDS_PARAMS.showurl.forbidden) ? "" : "AdsForm__description-warn"}
+          className={classNames({
+            "AdsForm__description-warn": form.showurl.match(FIELDS_PARAMS.showurl.forbidden),
+          })}
         >
           Допускаются только буквы, цифры и символы "-", "№", "/", "%", "#".
         </span>
@@ -116,7 +119,7 @@ export default function AdsForm() {
       <div className="AdsForm__description">
         До 4 уточнений. Общая длина не более 66 символов.
         <br />
-        <span className={checkSum("callouts") ? "" : "AdsForm__description-warn"}>
+        <span className={classNames({ "AdsForm__description-warn": !checkSum("callouts") })}>
           Текущая общая длина: {checkSum("callouts", true)}
         </span>
       </div>
@@ -129,7 +132,7 @@ export default function AdsForm() {
         <br />
         Общая длина заголовков не более 66 символов для каждой группы.
         <br />
-        <span className={checkSum("sitelinks1", false, "name") ? "" : "AdsForm__description-warn"}>
+        <span className={classNames({ "AdsForm__description-warn": !checkSum("sitelinks1", false, "name") })}>
           Первая группа: текущая общая длина заголовков: {checkSum("sitelinks1", true, "name")}
         </span>
       </div>
@@ -142,7 +145,9 @@ export default function AdsForm() {
       {extSitelinks ? (
         <div className="AdsForm__extsitelinks">
           <div className="AdsForm__description">
-            <span className={checkSum("sitelinks2", false, "name") ? "" : "AdsForm__description-warn"}>
+            <span
+              className={classNames({ "AdsForm__description-warn": !checkSum("sitelinks2", false, "name") })}
+            >
               Вторая группа: текущая общая длина заголовков: {checkSum("sitelinks2", true, "name")}
             </span>
           </div>

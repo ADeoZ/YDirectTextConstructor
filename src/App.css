@@ -64,8 +64,14 @@ body {
   margin-left: 10px;
 }
 
-.AdsForm__sitelinks-header:first-child {
+.AdsForm__sitelinks-header:first-child, .AdsForm__sitelinks-wrap:first-child {
   margin-left: 0px;
+}
+
+.AdsForm__sitelinks-wrap {
+  position: relative;
+  width: calc(100%/3);
+  margin-left: 10px;
 }
 
 .AdsForm__input {
@@ -91,8 +97,7 @@ body {
 }
 
 .AdsForm__input-sitelinks {
-  margin-left: 10px;
-  padding-right: 24px;
+  padding-right: 32px;
 }
 
 .AdsForm__input-sitelinks:first-child {
@@ -100,11 +105,10 @@ body {
 }
 
 .AdsForm__input-sitelinks:focus {
-  padding-right: 23px;
+  padding-right: 31px;
 }
 
 .AdsForm__info {
-  width: 20px;
   color: rgba(26, 43, 77, 0.6);
 }
 
@@ -113,8 +117,9 @@ body {
 }
 
 .AdsForm__info-sitelinks {
-  flex-shrink: 0;
-  margin-left: -30px;
+  position: absolute;
+  right: 6px;
+  top: calc(50% - 5px);
   font-size: 13px;
 }
 

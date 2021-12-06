@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 
 export default function AdsFormCallout(props) {
@@ -19,13 +20,13 @@ export default function AdsFormCallout(props) {
       <div className="AdsForm__subdescription">До 25 символов</div>
       <div className="AdsForm__line">
         <input
-          className={check ? "AdsForm__input" : "AdsForm__input AdsForm__input-warn"}
+          className={classNames("AdsForm__input", { "AdsForm__input-warn": !check })}
           name={`callout_${id}`}
           id={`callout_${id}`}
           value={form.callout[id]}
           onChange={handleChange}
         />
-        <div className={check <= 25 ? "AdsForm__info" : "AdsForm__info AdsForm__info-warn"}>
+        <div className={classNames("AdsForm__info", { "AdsForm__info-warn": !check })}>
           {form.callout[id].length}
         </div>
       </div>
