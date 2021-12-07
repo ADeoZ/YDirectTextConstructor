@@ -1,10 +1,10 @@
 import AdsFormSitelinkInput from "./AdsFormSitelinkInput";
 
 export default function AdsFormSitelink(props) {
-  const { id, checkCallback } = props;
+  const { id, checkCallback, checkSum, forbidden } = props;
 
   return (
-    <div key={id}>
+    <>
       №{id + 1}
       <div className="AdsForm__line AdsForm__sitelinks-headers">
         <div className="AdsForm__sitelinks-header">
@@ -28,9 +28,16 @@ export default function AdsFormSitelink(props) {
       </div>
       <div className="AdsForm__line">
         {["name", "descr", "link"].map((item) => (
-          <AdsFormSitelinkInput id={id} checkCallback={checkCallback} field={item} key={item} />
+          <AdsFormSitelinkInput
+            id={id}
+            checkCallback={checkCallback}
+            checkSum={item === "name" ? checkSum : true}
+            forbidden={forbidden}
+            field={item}
+            key={item}
+          />
         ))}
       </div>
-    </div>
+    </>
   );
 }

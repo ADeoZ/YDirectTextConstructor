@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 
 export default function AdsFormCallout(props) {
-  const { id, check } = props;
+  const { id, check, checkSum } = props;
   const form = useSelector((state) => state.adForm);
   const dispatch = useDispatch();
 
@@ -13,14 +13,14 @@ export default function AdsFormCallout(props) {
   };
 
   return (
-    <div>
+    <>
       <label className="AdsForm__label" htmlFor={`callout_${id}`}>
         №{id + 1}
       </label>
       <div className="AdsForm__subdescription">До 25 символов</div>
       <div className="AdsForm__line">
         <input
-          className={classNames("AdsForm__input", { "AdsForm__input-warn": !check })}
+          className={classNames("AdsForm__input", { "AdsForm__input-warn": !check || !checkSum })}
           name={`callout_${id}`}
           id={`callout_${id}`}
           value={form.callout[id]}
@@ -30,6 +30,6 @@ export default function AdsFormCallout(props) {
           {form.callout[id].length}
         </div>
       </div>
-    </div>
+    </>
   );
 }

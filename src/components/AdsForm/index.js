@@ -9,19 +9,37 @@ export default function AdsForm() {
   const FIELDS_PARAMS = {
     header: { length: 56 },
     extraheader: { length: 30, reg: /[.,"!;:]/g },
-    headers: { sum: { length: 56, fields: ["header", "extraheader"] } },
+    headers: { fields: { sum: 56, name: ["header", "extraheader"] } },
     text: { length: 81, reg: /[.,"!;:]/g },
     url: { length: 1024 },
-    showurl: { length: 20, forbidden: /[^a-zа-я0-9-№#/%]/i },
+    showurl: {
+      length: 20,
+      forbidden: {
+        reg: /[^a-zа-я0-9-№#/%]/i,
+        error: 'Допускаются только буквы, цифры и символы "-", "№", "/", "%", "#".',
+      },
+    },
     callout: { length: 25 },
-    callouts: { sum: { length: 66, fields: ["callout"], index: [0, 1, 2, 3] } },
+    callouts: { fields: { sum: 66, name: ["callout"], index: [0, 1, 2, 3] } },
     sitelink: {
-      name: { length: 30, forbidden: /[!?[\]]/g },
-      descr: { length: 60, forbidden: /[!?[\]]/g },
+      name: {
+        length: 30,
+        forbidden: {
+          reg: /[!?[\]]/g,
+          error: 'Нельзя использовать "!", "?", "[", "]".',
+        },
+      },
+      descr: {
+        length: 60,
+        forbidden: {
+          reg: /[!?[\]]/g,
+          error: 'Нельзя использовать "!", "?", "[", "]".',
+        },
+      },
       link: { length: 1016 },
     },
-    sitelinks1: { sum: { length: 66, fields: ["sitelink"], index: [0, 1, 2, 3] } },
-    sitelinks2: { sum: { length: 66, fields: ["sitelink"], index: [4, 5, 6, 7] } },
+    sitelinks1: { fields: { sum: 66, name: ["sitelink"], index: [0, 1, 2, 3] } },
+    sitelinks2: { fields: { sum: 66, name: ["sitelink"], index: [4, 5, 6, 7] } },
   };
 
   const form = useSelector((state) => state.adForm);
@@ -44,11 +62,11 @@ export default function AdsForm() {
     return fieldForm.length <= fieldConst.length;
   };
 
-  const checkSum = (field, sumReturn = false, subfield) => {
-    const sumName = FIELDS_PARAMS[field].sum;
-    const fieldsSum = sumName.fields.reduce((sum, item) => {
-      if (sumName.index) {
-        sumName.index.forEach((i) => {
+  const checkSum = (group, sumReturn = false, subfield) => {
+    const sumFields = FIELDS_PARAMS[group].fields;
+    const fieldsSum = sumFields.name.reduce((sum, item) => {
+      if (sumFields.index) {
+        sumFields.index.forEach((i) => {
           const formField = subfield ? form[item][i][subfield] : form[item][i];
           sum += formField.length;
         });
@@ -58,7 +76,7 @@ export default function AdsForm() {
       }
       return sum;
     }, 0);
-    return sumReturn ? fieldsSum : fieldsSum <= sumName.length;
+    return sumReturn ? fieldsSum : fieldsSum <= sumFields.sum;
   };
 
   const [extSitelinks, setExtSitelinks] = useState(false);
@@ -68,7 +86,7 @@ export default function AdsForm() {
     <form className="AdsForm">
       <div className="AdsForm__header">Заголовок объявления</div>
       <div className="AdsForm__description">
-        Общая длина не более 56 символов, включая знаки препинания и пробелы
+        Рекомендуемая общая длина не более 56 символов, включая знаки препинания и пробелы.
         <br />
         <span className={classNames({ "AdsForm__description-warn": !checkSum("headers") })}>
           Текущая общая длина: {checkSum("headers", true)}
@@ -104,17 +122,8 @@ export default function AdsForm() {
       <label className="AdsForm__label" htmlFor="showurl">
         Отображаемая ссылка
       </label>
-      <div className="AdsForm__subdescription">
-        До 20 символов.{" "}
-        <span
-          className={classNames({
-            "AdsForm__description-warn": form.showurl.match(FIELDS_PARAMS.showurl.forbidden),
-          })}
-        >
-          Допускаются только буквы, цифры и символы "-", "№", "/", "%", "#".
-        </span>
-      </div>
-      <AdsFormLine field="showurl" check={checkVal("showurl")} />
+      <div className="AdsForm__subdescription">До 20 символов.</div>
+      <AdsFormLine field="showurl" check={checkVal("showurl")} forbidden={FIELDS_PARAMS.showurl.forbidden} />
       <div className="AdsForm__header">Уточнения</div>
       <div className="AdsForm__description">
         До 4 уточнений. Общая длина не более 66 символов.
@@ -123,8 +132,13 @@ export default function AdsForm() {
           Текущая общая длина: {checkSum("callouts", true)}
         </span>
       </div>
-      {[0, 1, 2, 3].map((item) => (
-        <AdsFormCallout id={item} check={checkVal("callout", item)} key={item} />
+      {FIELDS_PARAMS.callouts.fields.index.map((item) => (
+        <AdsFormCallout
+          id={item}
+          check={checkVal("callout", item)}
+          checkSum={checkSum("callouts")}
+          key={item}
+        />
       ))}
       <div className="AdsForm__header">Быстрые ссылки</div>
       <div className="AdsForm__description">
@@ -136,8 +150,17 @@ export default function AdsForm() {
           Первая группа: текущая общая длина заголовков: {checkSum("sitelinks1", true, "name")}
         </span>
       </div>
-      {[0, 1, 2, 3].map((item) => (
-        <AdsFormSitelink id={item} checkCallback={checkVal} key={item} />
+      {FIELDS_PARAMS.sitelinks1.fields.index.map((item) => (
+        <AdsFormSitelink
+          id={item}
+          checkCallback={checkVal}
+          checkSum={checkSum("sitelinks1", false, "name")}
+          forbidden={{
+            name: FIELDS_PARAMS.sitelink.name.forbidden,
+            descr: FIELDS_PARAMS.sitelink.descr.forbidden,
+          }}
+          key={item}
+        />
       ))}
       <div className="AdsForm__extsitelinks-show" onClick={showExtSitelinks}>
         {extSitelinks ? "Скрыть" : "Показать"} вторую группу быстрых ссылок
@@ -151,8 +174,17 @@ export default function AdsForm() {
               Вторая группа: текущая общая длина заголовков: {checkSum("sitelinks2", true, "name")}
             </span>
           </div>
-          {[4, 5, 6, 7].map((item) => (
-            <AdsFormSitelink id={item} checkCallback={checkVal} key={item} />
+          {FIELDS_PARAMS.sitelinks2.fields.index.map((item) => (
+            <AdsFormSitelink
+              id={item}
+              checkCallback={checkVal}
+              checkSum={checkSum("sitelinks2", false, "name")}
+              forbidden={{
+                name: FIELDS_PARAMS.sitelink.name.forbidden,
+                descr: FIELDS_PARAMS.sitelink.descr.forbidden,
+              }}
+              key={item}
+            />
           ))}
         </div>
       ) : null}

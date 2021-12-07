@@ -29,6 +29,7 @@ body {
   from, to, 50% {
     opacity: 1;
   }
+
   25%, 75% {
     opacity: 0;
   }
@@ -51,6 +52,7 @@ body {
 
 .AdsForm__line {
   display: flex;
+  position: relative;
   align-items: baseline;
   margin-bottom: 25px;
 }
@@ -75,9 +77,9 @@ body {
 }
 
 .AdsForm__input {
-  flex: 0 1 auto;
+  flex-shrink: 0;
   box-sizing: border-box;
-  width: 100%;
+  width: 95%;
   height: 45px;
   border: 1px solid rgba(134, 148, 176, 0.6);
   border-radius: 5px;
@@ -97,6 +99,7 @@ body {
 }
 
 .AdsForm__input-sitelinks {
+  width: 100%;
   padding-right: 32px;
 }
 
@@ -115,6 +118,40 @@ body {
 .AdsForm__info-warn {
   color: red;
 }
+
+.AdsForm__input-error {
+  position: absolute;
+  box-sizing: border-box;
+  width: 95%;
+  height: 25px;
+  bottom: -21px;
+  border: 1px solid red;
+  border-top: 0;
+  padding: 6px 10px;
+  color: red;
+  font-size: 12px;
+  animation: error 0.1s ease-in-out;
+  transform-origin: center top;
+}
+
+.AdsForm__sitelinks__input-error {
+  width: 100%;
+  height: 23px;
+  bottom: -19px;
+}
+
+@keyframes error {
+  from {
+    opacity: 0;
+    transform: scaleY(10%);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(100%);
+  }
+}
+
 
 .AdsForm__info-sitelinks {
   position: absolute;
