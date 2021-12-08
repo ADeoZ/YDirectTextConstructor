@@ -1,0 +1,14 @@
+.Constructor {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.Constructor__left_column {
+  width: 100%;
+}
+
+.Constructor__right_column {
+  width: 100%;
+  min-width: 580px;
+}

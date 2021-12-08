@@ -1,0 +1,7 @@
+.AdsShow {
+  position: fixed;
+  box-sizing: border-box;
+  width: 580px;
+  flex-shrink: 0;
+  border: 1px solid black;
+}
