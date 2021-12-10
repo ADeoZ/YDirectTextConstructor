@@ -1,13 +1,13 @@
 .AdsForm {
   flex-shrink: 0;
   width: 620px;
+  background-color: #ffffff;
 }
 
 .AdsForm__header {
   font-size: 24px;
   letter-spacing: 0.06px;
   padding-bottom: 5px;
-  margin-top: 30px;
 }
 
 .AdsForm__description {

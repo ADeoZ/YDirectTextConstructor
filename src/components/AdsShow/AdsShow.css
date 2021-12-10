@@ -3,5 +3,7 @@
   box-sizing: border-box;
   width: 580px;
   flex-shrink: 0;
-  border: 1px solid black;
+  top: 50px;
+  padding: 10px;
+  box-shadow: 3px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }

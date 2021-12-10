@@ -4,7 +4,12 @@ import './App.css';
 
 function App() {
   return (
-      <Constructor/>
+    <>
+      <header className='header'>
+        <h1>Конструктор объявлений Яндекс.Директ</h1>
+      </header>
+      <Constructor />
+    </>
   );
 }
 
