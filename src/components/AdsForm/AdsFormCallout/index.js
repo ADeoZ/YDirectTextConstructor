@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 
 export default function AdsFormCallout(props) {
-  const { id, check, checkSum } = props;
+  const { id, check, checkSum, forbidden } = props;
   const form = useSelector((state) => state.adForm);
   const dispatch = useDispatch();
 
@@ -29,6 +29,9 @@ export default function AdsFormCallout(props) {
         <div className={classNames("AdsForm__info", { "AdsForm__info-warn": !check })}>
           {form.callout[id].length}
         </div>
+        {forbidden && form.callout[id].match(forbidden.reg) ? (
+          <div className="AdsForm__input-error">{forbidden.error}</div>
+        ) : null}
       </div>
     </>
   );

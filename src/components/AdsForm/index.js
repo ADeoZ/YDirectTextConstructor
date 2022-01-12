@@ -5,44 +5,9 @@ import classNames from "classnames/bind";
 import AdsFormCallout from "./AdsFormCallout";
 import AdsFormLine from "./AdsFormLine";
 import AdsFormSitelink from "./AdsFormSitelink";
+import { FIELDS_PARAMS } from '../fieldsParams';
 
 export default function AdsForm() {
-  const FIELDS_PARAMS = {
-    header: { length: 56 },
-    extraheader: { length: 30, reg: /[.,"!;:]/g },
-    headers: { fields: { sum: 56, name: ["header", "extraheader"] } },
-    text: { length: 81, reg: /[.,"!;:]/g },
-    url: { length: 1024 },
-    showurl: {
-      length: 20,
-      forbidden: {
-        reg: /[^a-zа-я0-9-№#/%]/i,
-        error: 'Допускаются только буквы, цифры и символы "-", "№", "/", "%", "#".',
-      },
-    },
-    callout: { length: 25 },
-    callouts: { fields: { sum: 66, name: ["callout"], index: [0, 1, 2, 3] } },
-    sitelink: {
-      name: {
-        length: 30,
-        forbidden: {
-          reg: /[!?[\]]/g,
-          error: 'Нельзя использовать "!", "?", "[", "]".',
-        },
-      },
-      descr: {
-        length: 60,
-        forbidden: {
-          reg: /[!?[\]]/g,
-          error: 'Нельзя использовать "!", "?", "[", "]".',
-        },
-      },
-      link: { length: 1016 },
-    },
-    sitelinks1: { fields: { sum: 66, name: ["sitelink"], index: [0, 1, 2, 3] } },
-    sitelinks2: { fields: { sum: 66, name: ["sitelink"], index: [4, 5, 6, 7] } },
-  };
-
   const form = useSelector((state) => state.adForm);
 
   const checkVal = (field, index, subfield) => {
@@ -138,6 +103,7 @@ export default function AdsForm() {
           id={item}
           check={checkVal("callout", item)}
           checkSum={checkSum("callouts")}
+          forbidden={FIELDS_PARAMS.callout.forbidden}
           key={item}
         />
       ))}

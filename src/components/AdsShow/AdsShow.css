@@ -60,9 +60,15 @@
 }
 
 .AdsShow__path_link {
+  display: inline-block;
+  max-width: 91%;
   text-decoration: none;
   outline: 0;
   color: rgb(0, 96, 0);
+  vertical-align: top;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .AdsShow__path_separator {
@@ -108,13 +114,35 @@
   line-height: 13px;
 }
 
+.AdsShow__sitelinks--string {
+  display: block;
+  margin: 4px 0 0 0;
+  height: 16px;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 16px;
+}
+
 .AdsShow__sitelinks-item {
   box-sizing: border-box;
   width: 50%;
   max-width: 100%;
   margin-left: 0;
   overflow: hidden;
-  cursor: pointer;
+}
+
+.AdsShow__sitelinks-item--string {
+  box-sizing: border-box;
+  max-width: 100%;
+  display: inline-block;
+  overflow: visible;
+  line-height: 17px;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.AdsShow__sitelinks-item--string+.AdsShow__sitelinks-item--string {
+  margin-left: 14px;
 }
 
 .AdsShow__sitelinks-item:nth-child(2n+1) {
@@ -135,6 +163,23 @@
   text-decoration: none;
   outline: 0;
   color: rgb(0, 0, 128);
+}
+
+.AdsShow__sitelinks-item--string .AdsShow__sitelinks-title {
+  line-height: 16px;
+  font-size: 13px;
+}
+
+.AdsShow__sitelinks-item--string+.AdsShow__sitelinks-item--string .AdsShow__sitelinks-title::before {
+  display: inline-block;
+  width: 2px;
+  height: 2px;
+  margin-right: 7px;
+  margin-left: -7px;
+  content: '';
+  vertical-align: middle;
+  border-radius: 50%;
+  background-color: #000000;
 }
 
 .AdsShow__sitelinks-description {
