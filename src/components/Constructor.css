@@ -1,7 +1,13 @@
 .Constructor {
-  display: flex;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.Constructor__wrapper {
+  display: flex;
+  margin-bottom: 50px;
 }
 
 .Constructor__left_column {
@@ -11,4 +17,24 @@
 .Constructor__right_column {
   width: 100%;
   min-width: 580px;
+}
+
+.Constructor__button {
+  width: 620px;
+  padding: 10px 0px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(0deg, #ffcc3f, #ffcc00);
+  align-self: center;
+  color: #2f3747;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.Constructor__button:hover {
+  background: linear-gradient(180deg, #fdc220, #ffcc00);
+}
+
+.Constructor__button:focus {
+    outline: 2px solid #001d9e;
 }

@@ -3,13 +3,13 @@ import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 
 export default function AdsFormCallout(props) {
-  const { id, check, checkSum, forbidden } = props;
-  const form = useSelector((state) => state.adForm);
+  const { adId, id, check, checkSum, forbidden } = props;
+  const form = useSelector((state) => state.adForm[adId]);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch(changeField({ name, value }));
+    dispatch(changeField({ adId, name, value }));
   };
 
   return (

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialForm = {
   header: "",
   extraheader: "",
   text: "",
@@ -17,27 +17,32 @@ const initialState = {
     { name: "", link: "", descr: "" },
     { name: "", link: "", descr: "" },
   ],
-};
+}; 
+
+const initialState = [];
 
 const adFormSlice = createSlice({
   name: "adForm",
   initialState,
   reducers: {
+    addEmptyAd: (state) => {
+      state.push(initialForm);
+    },
     changeField: (state, action) => {
-      const { name, value } = action.payload;
+      const { adId, name, value } = action.payload;
       const compName = name.split("_");
       if (compName[1]) {
         if (compName[2]) {
-          state[compName[0]][compName[1]][compName[2]] = value;
+          state[adId][compName[0]][compName[1]][compName[2]] = value;
         } else {
-          state[compName[0]][compName[1]] = value;
+          state[adId][compName[0]][compName[1]] = value;
         }
       } else {
-        state[name] = value;
+        state[adId][name] = value;
       }
     },
   },
 });
 
-export const { changeField } = adFormSlice.actions;
+export const { addEmptyAd, changeField } = adFormSlice.actions;
 export default adFormSlice.reducer;

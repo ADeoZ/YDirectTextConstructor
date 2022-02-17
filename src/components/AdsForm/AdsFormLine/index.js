@@ -3,14 +3,14 @@ import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 
 export default function AdsFormLine(props) {
-  const { field, check, reg, forbidden } = props;
-  const form = useSelector((state) => state.adForm);
+  const { adId, field, check, reg, forbidden } = props;
+  const form = useSelector((state) => state.adForm[adId]);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name } = event.target;
     const value = name === "showurl" ? event.target.value.replace(" ", "-") : event.target.value;
-    dispatch(changeField({ name, value }));
+    dispatch(changeField({ adId, name, value }));
   };
 
   return (

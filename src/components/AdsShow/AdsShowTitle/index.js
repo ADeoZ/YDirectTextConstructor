@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
 import { FIELDS_PARAMS } from "../../fieldsParams";
 
-export default function AdsShowTitle() {
-  const { header, extraheader } = useSelector((state) => state.adForm);
+export default function AdsShowTitle(props) {
+  const { header, extraheader } = props;
   
   let fullTitle = 'Заголовок объявления';
 

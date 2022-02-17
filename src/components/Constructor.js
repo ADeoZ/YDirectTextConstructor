@@ -1,15 +1,32 @@
 import "./Constructor.css";
-import AdsForm from "./AdsForm";
-import AdsShow from "./AdsShow";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmptyAd } from "../reducers/adFormSlice";
+import AdsWrapper from "./AdsWrapper";
 
 export default function Constructor() {
+  const ads = useSelector((state) => state.adForm);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addEmptyAd());
+  }, [dispatch]);
+
+  const handleClick = () => {
+    dispatch(addEmptyAd());
+  }
+
   return (
     <main className="Constructor">
-      <div className="Constructor__left_column" />
-      <AdsForm />
-      <div className="Constructor__right_column">
-        <AdsShow />
-      </div>
+      {ads.map((_, index) =>
+        <AdsWrapper id={index} key={index} />
+      )}
+      <button
+        className="Constructor__button"
+        onClick={handleClick}
+      >
+        Добавить объявление
+      </button>
     </main>
   );
 }

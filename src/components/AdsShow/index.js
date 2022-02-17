@@ -5,9 +5,9 @@ import AdsShowCallouts from "./AdsShowCallouts";
 import AdsShowSitelinks from "./AdsShowSitelinks";
 import AdsShowTitle from "./AdsShowTitle";
 
-export default function AdsShow() {
-
-  const data = useSelector((state) => state.adForm);
+export default function AdsShow(props) {
+  const { adId } = props;
+  const data = useSelector((state) => state.adForm[adId]);
 
   const cutString = (field, index, subfield) => {
     let fieldForm = data[field];
@@ -35,11 +35,14 @@ export default function AdsShow() {
 
   return (
     <div className="AdsShow">
-    <h2 className="AdsShow__title">
-      <a className="AdsShow__title-link" href="#plug">
-        <div className="AdsShow__favicon" style={{backgroundImage: 'url(https://favicon.yandex.net/favicon/' + checkURL(data.url) + '?size=32)'}}/>
-        <AdsShowTitle />
-      </a>
+      <h2 className="AdsShow__title">
+        <a className="AdsShow__title-link" href="#plug">
+          <div className="AdsShow__favicon" style={{ backgroundImage: 'url(https://favicon.yandex.net/favicon/' + checkURL(data.url) + '?size=32)' }} />
+          <AdsShowTitle
+            header={data.header}
+            extraheader={data.extraheader}
+          />
+        </a>
       </h2>
       <div className="AdsShow__path">
         <a className="AdsShow__path_link" href="#plug"><b>{checkURL(data.url) || 'домен'}</b><span className="AdsShow__path_separator">&rsaquo;</span>{cutString("showurl") || cutString("header") || 'Заголовок объявления'}</a>
@@ -48,9 +51,13 @@ export default function AdsShow() {
       <div className="AdsShow__content">
         <span className="AdsShow__content-adv">Реклама<span className="AdsShow__content-dot">&nbsp;· </span></span>
         {cutString("text") || 'Текст объявления'}
-        <AdsShowCallouts />
+        <AdsShowCallouts
+          callouts={data.callout}
+        />
       </div>
-      <AdsShowSitelinks />
+      <AdsShowSitelinks
+        sitelinks={data.sitelink}
+      />
     </div>
   )
 }

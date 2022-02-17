@@ -7,8 +7,9 @@ import AdsFormLine from "./AdsFormLine";
 import AdsFormSitelink from "./AdsFormSitelink";
 import { FIELDS_PARAMS } from '../fieldsParams';
 
-export default function AdsForm() {
-  const form = useSelector((state) => state.adForm);
+export default function AdsForm(props) {
+  const { adId } = props;
+  const form = useSelector((state) => state.adForm[adId]);
 
   const checkVal = (field, index, subfield) => {
     let fieldForm = form[field];
@@ -62,14 +63,14 @@ export default function AdsForm() {
         Основной заголовок <span className="AdsForm__required">*</span>
       </label>
       <div className="AdsForm__subdescription">До 56 символов, включая знаки препинания и пробелы</div>
-      <AdsFormLine field="header" check={checkVal("header")} />
+      <AdsFormLine adId={adId} field="header" check={checkVal("header")} />
       <label className="AdsForm__label" htmlFor="extraheader">
         Дополнительный заголовок
       </label>
       <div className="AdsForm__subdescription">
         До 30 символов, включая пробелы. Знаки препинания не считаются.
       </div>
-      <AdsFormLine field="extraheader" check={checkVal("extraheader")} reg={FIELDS_PARAMS.extraheader.reg} />
+      <AdsFormLine adId={adId} field="extraheader" check={checkVal("extraheader")} reg={FIELDS_PARAMS.extraheader.reg} />
       <div className="AdsForm__header">
         <label htmlFor="text">
           Текст объявления <span className="AdsForm__required">*</span>
@@ -78,18 +79,18 @@ export default function AdsForm() {
       <div className="AdsForm__subdescription">
         До 81 символа, включая пробелы. Знаки препинания не считаются.
       </div>
-      <AdsFormLine field="text" check={checkVal("text")} reg={FIELDS_PARAMS.text.reg} />
+      <AdsFormLine adId={adId} field="text" check={checkVal("text")} reg={FIELDS_PARAMS.text.reg} />
       <div className="AdsForm__header">Ссылка объявления</div>
       <label className="AdsForm__label" htmlFor="url">
         Целевой URL <span className="AdsForm__required">*</span>
       </label>
       <div className="AdsForm__subdescription">До 1024 символов</div>
-      <AdsFormLine field="url" check={checkVal("url")} />
+      <AdsFormLine adId={adId} field="url" check={checkVal("url")} />
       <label className="AdsForm__label" htmlFor="showurl">
         Отображаемая ссылка
       </label>
       <div className="AdsForm__subdescription">До 20 символов.</div>
-      <AdsFormLine field="showurl" check={checkVal("showurl")} forbidden={FIELDS_PARAMS.showurl.forbidden} />
+      <AdsFormLine adId={adId} field="showurl" check={checkVal("showurl")} forbidden={FIELDS_PARAMS.showurl.forbidden} />
       <div className="AdsForm__header">Уточнения</div>
       <div className="AdsForm__description">
         До 4 уточнений. Общая длина не более 66 символов.
@@ -100,6 +101,7 @@ export default function AdsForm() {
       </div>
       {FIELDS_PARAMS.callouts.fields.index.map((item) => (
         <AdsFormCallout
+          adId={adId}
           id={item}
           check={checkVal("callout", item)}
           checkSum={checkSum("callouts")}
@@ -119,6 +121,7 @@ export default function AdsForm() {
       </div>
       {FIELDS_PARAMS.sitelinks1.fields.index.map((item) => (
         <AdsFormSitelink
+          adId={adId}
           id={item}
           checkCallback={checkVal}
           checkSum={checkSum("sitelinks1", false, "name")}
@@ -135,6 +138,8 @@ export default function AdsForm() {
       {extSitelinks ? (
         <div className="AdsForm__extsitelinks">
           <div className="AdsForm__description">
+            Показывается только при заполнении всех полей.
+            <br />
             <span
               className={classNames({ "AdsForm__description-warn": !checkSum("sitelinks2", false, "name") })}
             >
@@ -143,6 +148,7 @@ export default function AdsForm() {
           </div>
           {FIELDS_PARAMS.sitelinks2.fields.index.map((item) => (
             <AdsFormSitelink
+              adId={adId}
               id={item}
               checkCallback={checkVal}
               checkSum={checkSum("sitelinks2", false, "name")}

@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
 import { FIELDS_PARAMS } from "../../fieldsParams";
 
-export default function AdsShowCallouts() {
-  const callouts = useSelector((state) => state.adForm.callout);
+export default function AdsShowCallouts(props) {
+  const {callouts} = props;
 
   const calloutsOutput = [];
   let lengthSum = 0;

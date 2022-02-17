@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeField } from "../../../../reducers/adFormSlice";
 
 export default function AdsFormSitelinkInput(props) {
-  const { id, checkCallback, checkSum, forbidden, field } = props;
-  const form = useSelector((state) => state.adForm);
+  const { adId, id, checkCallback, checkSum, forbidden, field } = props;
+  const form = useSelector((state) => state.adForm[adId]);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch(changeField({ name, value }));
+    dispatch(changeField({ adId, name, value }));
   };
 
   return (
