@@ -1,17 +1,24 @@
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
+import { useCheckVal } from "../../customHooks/useCheckVal";
+import { FIELDS_PARAMS } from '../../fieldsParams';
 
 export default function AdsFormLine(props) {
-  const { adId, field, check, reg, forbidden } = props;
+  const { adId, field, reg, forbidden } = props;
   const form = useSelector((state) => state.adForm[adId]);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    const { name } = event.target;
+    const { name } = event.target; 
+
+    // для отображаемой ссылки сразу меняем пробелы на "-"
     const value = name === "showurl" ? event.target.value.replace(" ", "-") : event.target.value;
+
     dispatch(changeField({ adId, name, value }));
   };
+
+  const check = useCheckVal(form[field], FIELDS_PARAMS[field]);
 
   return (
     <div className="AdsForm__line">

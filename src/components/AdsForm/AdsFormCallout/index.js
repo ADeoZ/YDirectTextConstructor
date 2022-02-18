@@ -1,9 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
+import { useCheckVal } from "../../customHooks/useCheckVal";
+import { useCheckSum } from "../../customHooks/useCheckSum";
+import { FIELDS_PARAMS } from '../../fieldsParams';
 
 export default function AdsFormCallout(props) {
-  const { adId, id, check, checkSum, forbidden } = props;
+  const { adId, id, checkSum, forbidden } = props;
   const form = useSelector((state) => state.adForm[adId]);
   const dispatch = useDispatch();
 
@@ -11,6 +14,9 @@ export default function AdsFormCallout(props) {
     const { name, value } = event.target;
     dispatch(changeField({ adId, name, value }));
   };
+
+  const check = useCheckVal(form.callout[id], FIELDS_PARAMS.callout);
+  // const checkSums = useCheckSum()
 
   return (
     <>

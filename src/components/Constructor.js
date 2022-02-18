@@ -8,10 +8,12 @@ export default function Constructor() {
   const ads = useSelector((state) => state.adForm);
   const dispatch = useDispatch();
 
+  // создаём первичное пустое объявление
   useEffect(() => {
     dispatch(addEmptyAd());
   }, [dispatch]);
 
+  // кнопка добавления объявления
   const handleClick = () => {
     dispatch(addEmptyAd());
   }

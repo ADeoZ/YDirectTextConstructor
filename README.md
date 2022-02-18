@@ -1,4 +1,4 @@
-#Yandex Direct Text Constructor
+# Yandex Direct Text Constructor
 
 Конструктор текстовых объявлений Яндекс.Директ с возможностью копирования результата
 

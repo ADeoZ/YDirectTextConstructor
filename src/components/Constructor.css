@@ -7,7 +7,12 @@
 
 .Constructor__wrapper {
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+}
+
+.Constructor__wrapper:first-of-type form {
+  border-top: none;
+
 }
 
 .Constructor__left_column {
@@ -28,6 +33,7 @@
   align-self: center;
   color: #2f3747;
   text-transform: uppercase;
+  font-size: 16px;
   font-weight: 600;
 }
 

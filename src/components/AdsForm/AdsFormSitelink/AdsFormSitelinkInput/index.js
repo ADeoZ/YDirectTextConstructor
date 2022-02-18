@@ -1,9 +1,11 @@
 import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { changeField } from "../../../../reducers/adFormSlice";
+import { useCheckVal } from "../../../customHooks/useCheckVal";
+import { FIELDS_PARAMS } from '../../../fieldsParams';
 
 export default function AdsFormSitelinkInput(props) {
-  const { adId, id, checkCallback, checkSum, forbidden, field } = props;
+  const { adId, id, checkSum, forbidden, field } = props;
   const form = useSelector((state) => state.adForm[adId]);
   const dispatch = useDispatch();
 
@@ -12,11 +14,13 @@ export default function AdsFormSitelinkInput(props) {
     dispatch(changeField({ adId, name, value }));
   };
 
+  const check = useCheckVal(form.sitelink[id][field], FIELDS_PARAMS.sitelink[field]);
+
   return (
     <div className="AdsForm__sitelinks-wrap">
       <input
         className={classNames("AdsForm__input", "AdsForm__input-sitelinks", {
-          "AdsForm__input-warn": !checkCallback("sitelink", id, field) || !checkSum,
+          "AdsForm__input-warn": !check || !checkSum,
         })}
         name={`sitelink_${id}_${field}`}
         id={`sitelink_${id}_${field}`}
@@ -25,7 +29,7 @@ export default function AdsFormSitelinkInput(props) {
       />
       <div
         className={classNames("AdsForm__info", "AdsForm__info-sitelinks", {
-          "AdsForm__info-warn": !checkCallback("sitelink", id, field),
+          "AdsForm__info-warn": !check,
         })}
       >
         {form.sitelink[id][field].length}

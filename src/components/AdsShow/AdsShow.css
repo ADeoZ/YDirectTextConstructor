@@ -10,20 +10,29 @@
 
 .AdsShow {
   position: sticky;
-  top: 50px;
+  top: 15px;
   margin-bottom: 10px;
+  padding-top: 10px;
   width: 580px;
   box-sizing: border-box;
   flex-shrink: 0;
-  padding: 20px 10px 20px 32px;
-  border: 1px solid rgba(0, 26, 128, 0.1);
-  box-shadow: 3px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  font-family: 'YD Regular', Arial, Helvetica, sans-serif;
 }
 
 .AdsShow b {
   font-family: 'YD Bold', Arial, Helvetica, sans-serif;
   font-weight: 400;
+}
+
+.AdsShow h2 {
+  font-weight: normal;
+  margin: 0 0 20px 10px;
+}
+
+.AdsShow__wrapper {
+  padding: 20px 10px 20px 32px;
+  border: 1px solid rgba(0, 26, 128, 0.1);
+  box-shadow: 3px 4px 8px 0px rgba(34, 60, 80, 0.2);  
+  font-family: 'YD Regular', Arial, Helvetica, sans-serif;
 }
 
 .AdsShow__title {

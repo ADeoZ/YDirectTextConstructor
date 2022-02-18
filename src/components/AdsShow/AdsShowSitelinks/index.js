@@ -7,6 +7,7 @@ export default function AdsShowSitelinks(props) {
 
   const sitelinksBasic = sitelinks.slice(0, 4).filter((sitelink) => sitelink.name.length > 0);
   const firstBlock = sitelinksBasic.slice(0, 4).filter((sitelink) => sitelink.descr.length > 0);
+  // второй блок быстрых ссылок показывается только при заполнении всех имён и описаний
   const secondBlock = sitelinks.slice(4, 8).filter((sitelink) => sitelink.name.length > 0 && sitelink.descr.length > 0);
 
   return (

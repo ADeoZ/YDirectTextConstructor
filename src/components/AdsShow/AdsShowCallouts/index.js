@@ -3,6 +3,7 @@ import { FIELDS_PARAMS } from "../../fieldsParams";
 export default function AdsShowCallouts(props) {
   const {callouts} = props;
 
+  // собираем уточнения до ограничения по сумме
   const calloutsOutput = [];
   let lengthSum = 0;
   for (const callout of callouts) {

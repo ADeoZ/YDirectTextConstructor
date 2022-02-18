@@ -5,15 +5,20 @@ export default function AdsShowTitle(props) {
   
   let fullTitle = 'Заголовок объявления';
 
+  // компонуем заголовок объявления
   if (header.trim().length) {
+    // если есть дополнительный заголовок, объединяем его с основным
     if (extraheader.trim().length) {
+      // обрезаем заголовки по длине
       let cutHeader = header.trim().substring(0, FIELDS_PARAMS.header.length);
       let cutExtraheader = extraheader.trim().substring(0, FIELDS_PARAMS.extraheader.length);
 
+      // меняем знак в конце основного заголовка на точку
       if(!/[.!?,:;]$/.test(cutHeader)) {
         cutHeader += '.';
       }
 
+      // обрезаем дополнительный заголовок, если не проходим по сумме заголовков
       if (cutHeader.length + cutExtraheader.length + 1 > FIELDS_PARAMS.headers.fields.sum) {
         const availablePosition = FIELDS_PARAMS.headers.fields.sum - 1 - cutHeader.length;
         cutExtraheader = cutExtraheader.substring(0, cutExtraheader.lastIndexOf(' ', availablePosition)).trim() + '…';
