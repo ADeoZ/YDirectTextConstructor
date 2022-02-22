@@ -194,3 +194,11 @@
 .AdsShow__sitelinks-description {
   line-height: 16px;
 }
+
+.AdsShow__wrapper-dropdowns {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 20px;
+}

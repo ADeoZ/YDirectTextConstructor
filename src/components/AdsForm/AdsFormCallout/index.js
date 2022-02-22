@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames/bind";
 import { changeField } from "../../../reducers/adFormSlice";
 import { useCheckVal } from "../../customHooks/useCheckVal";
-import { useCheckSum } from "../../customHooks/useCheckSum";
 import { FIELDS_PARAMS } from '../../fieldsParams';
 
 export default function AdsFormCallout(props) {
@@ -16,7 +15,6 @@ export default function AdsFormCallout(props) {
   };
 
   const check = useCheckVal(form.callout[id], FIELDS_PARAMS.callout);
-  // const checkSums = useCheckSum()
 
   return (
     <>

@@ -36,6 +36,6 @@ export const FIELDS_PARAMS = {
     },
     link: { length: 1016 },
   },
-  sitelinks1: { fields: { sum: 66, name: ["sitelink"], index: [0, 1, 2, 3] } },
-  sitelinks2: { fields: { sum: 66, name: ["sitelink"], index: [4, 5, 6, 7] } },
+  sitelinks1: { fields: { sum: 66, name: ["sitelink"], index: [0, 1, 2, 3], subfield: "name" } },
+  sitelinks2: { fields: { sum: 66, name: ["sitelink"], index: [4, 5, 6, 7], subfield: "name" } },
 };

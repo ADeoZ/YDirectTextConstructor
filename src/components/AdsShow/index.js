@@ -1,9 +1,10 @@
 import "./AdsShow.css";
 import { useSelector } from "react-redux";
-import { FIELDS_PARAMS } from '../fieldsParams';
+import { FIELDS_PARAMS } from "../fieldsParams";
 import AdsShowCallouts from "./AdsShowCallouts";
 import AdsShowSitelinks from "./AdsShowSitelinks";
 import AdsShowTitle from "./AdsShowTitle";
+import AdsDropdown from "../AdsDropdown";
 
 export default function AdsShow(props) {
   const { adId } = props;
@@ -34,8 +35,8 @@ export default function AdsShow(props) {
   // проверяем целевой URL
   const checkURL = (url) => {
     const domain = url.match(/^(?:https?:\/\/)?(?:www\.)?([^:/?=]+)/i);
-    return domain ? domain[1] : 'yandex.ru';
-  }
+    return domain ? domain[1] : "yandex.ru";
+  };
 
   return (
     <div className="AdsShow">
@@ -43,28 +44,36 @@ export default function AdsShow(props) {
       <div className="AdsShow__wrapper">
         <h3 className="AdsShow__title">
           <a className="AdsShow__title-link" href="#plug">
-            <div className="AdsShow__favicon" style={{ backgroundImage: 'url(https://favicon.yandex.net/favicon/' + checkURL(data.url) + '?size=32)' }} />
-            <AdsShowTitle
-              header={data.header}
-              extraheader={data.extraheader}
+            <div
+              className="AdsShow__favicon"
+              style={{
+                backgroundImage: "url(https://favicon.yandex.net/favicon/" + checkURL(data.url) + "?size=32)",
+              }}
             />
+            <AdsShowTitle header={data.header} extraheader={data.extraheader} />
           </a>
         </h3>
         <div className="AdsShow__path">
-          <a className="AdsShow__path_link" href="#plug"><b>{checkURL(data.url) || 'домен'}</b><span className="AdsShow__path_separator">&rsaquo;</span>{cutString("showurl") || cutString("header") || 'Заголовок объявления'}</a>
+          <a className="AdsShow__path_link" href="#plug">
+            <b>{checkURL(data.url) || "домен"}</b>
+            <span className="AdsShow__path_separator">&rsaquo;</span>
+            {cutString("showurl") || cutString("header") || "Заголовок объявления"}
+          </a>
           <div className="AdsShow__path_dots" />
         </div>
         <div className="AdsShow__content">
-          <span className="AdsShow__content-adv">Реклама<span className="AdsShow__content-dot">&nbsp;· </span></span>
-          {cutString("text") || 'Текст объявления'}
-          <AdsShowCallouts
-            callouts={data.callout}
-          />
+          <span className="AdsShow__content-adv">
+            Реклама<span className="AdsShow__content-dot">&nbsp;· </span>
+          </span>
+          {cutString("text") || "Текст объявления"}
+          <AdsShowCallouts callouts={data.callout} />
         </div>
-        <AdsShowSitelinks
-          sitelinks={data.sitelink}
-        />
+        <AdsShowSitelinks sitelinks={data.sitelink} />
+      </div>
+      <div className="AdsShow__wrapper-dropdowns">
+        <AdsDropdown text="Сохранить объявление" callback={() => console.log("save")} />
+        <AdsDropdown text="Сохранить все объявления" callback={() => console.log("all")} />
       </div>
     </div>
-  )
+  );
 }

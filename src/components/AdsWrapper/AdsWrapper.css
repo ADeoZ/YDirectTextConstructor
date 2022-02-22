@@ -1,0 +1,17 @@
+.AdsWrapper {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.AdsWrapper:first-of-type form {
+  border-top: none;
+}
+
+.AdsWrapper__left_column {
+  width: 100%;
+}
+
+.AdsWrapper__right_column {
+  width: 100%;
+  min-width: 580px;
+}
