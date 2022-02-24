@@ -9,7 +9,7 @@
   padding: 10px 15px;
   border: 1px solid #498bff;
   border-radius: 4px;
-  background: #b0bdd633;
+  background: #ffffff;
   color: #2f3747;
   text-align: left;
   font-size: 14px;
@@ -19,7 +19,12 @@
 }
 
 .AdsDropdown__button--selected {
-  background: #ced4df;
+  background: #b0bdd633;
+}
+
+.AdsDropdown__button--status {
+  background: #498bff;
+  color: #ffffff;
 }
 
 .AdsDropdown__button::after {
@@ -38,11 +43,16 @@
 }
 
 .AdsDropdown__button:hover {
-  background: #ced4df;
+  background: #b0bdd633;
 }
 
 .AdsDropdown__button:focus {
   outline: 1px solid #001d9e;
+}
+
+
+.AdsDropdown__button--status:hover {
+  background: #498bff;
 }
 
 .AdsDropdown__list {

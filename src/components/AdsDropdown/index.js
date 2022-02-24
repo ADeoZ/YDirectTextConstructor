@@ -1,31 +1,53 @@
 import "./AdsDropdown.css";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import classNames from "classnames/bind";
 
-export default function AdsDropdown({ text }) {
+export default function AdsDropdown({ text, selectList }) {
   const [selected, setSelected] = useState(false);
-  const ref = useRef(null);
+  const [status, setStatus] = useState(null);
+
+  // потеря фокуса (срабатывает при клике и при переключении через tab)
+  const handleBlur = () => {
+    setSelected(false);
+  }
 
   const handleClick = () => {
     setSelected(!selected);
-    console.log(ref.current.getBoundingClientRect());
-  };
+  }
+
+  const handleItemClick = (callback, success) => {
+    callback();
+    setStatus(success);
+    setTimeout(() => setStatus(null), 3000);
+  }
 
   return (
-    <div className="AdsDropdown">
+    <div
+      className="AdsDropdown"
+      onBlur={handleBlur}
+    >
       <button
-        className={classNames("AdsDropdown__button", { "AdsDropdown__button--selected": selected })}
+        className={classNames("AdsDropdown__button",
+          {
+            "AdsDropdown__button--selected": selected,
+            "AdsDropdown__button--status": status,
+          })}
         onClick={handleClick}
-        ref={ref}
       >
-        {text}
-      </button>  
-      {selected &&    
-      <ul className="AdsDropdown__list">
-        <li className="AdsDropdown__list-item">Скопировать как текст</li>
-        <li className="AdsDropdown__list-item">Сохранить в виде ссылки</li>
-        <li className="AdsDropdown__list-item">Скачать в csv-формате</li>
-      </ul>
+        {status || text}
+      </button>
+      {selected &&
+        <ul className="AdsDropdown__list">
+          {selectList.map((item, index) =>
+            <li
+              className="AdsDropdown__list-item"
+              onMouseDown={() => handleItemClick(item.callback, item.success)}
+              key={index}
+            >
+              {item.text}
+            </li>
+          )}
+        </ul>
       }
     </div>
   );

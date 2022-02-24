@@ -38,6 +38,26 @@ export default function AdsShow(props) {
     return domain ? domain[1] : "yandex.ru";
   };
 
+  const textCopy = () => {
+    navigator.clipboard.writeText('Full ads');
+  }
+
+  const dropdownCallbacks = [
+    {
+      text: "Скопировать как текст",
+      success: "Текст скопирован в буфер обмена",
+      callback: textCopy,
+    },
+    {
+      text: "Сохранить в виде ссылки",
+      callback: () => console.log('save link'),
+    },
+    {
+      text: "Скачать в csv-формате",
+      callback: () => console.log('download csv'),
+    },
+  ];
+
   return (
     <div className="AdsShow">
       <h2>Объявление №{adId + 1}</h2>
@@ -71,8 +91,8 @@ export default function AdsShow(props) {
         <AdsShowSitelinks sitelinks={data.sitelink} />
       </div>
       <div className="AdsShow__wrapper-dropdowns">
-        <AdsDropdown text="Сохранить объявление" callback={() => console.log("save")} />
-        <AdsDropdown text="Сохранить все объявления" callback={() => console.log("all")} />
+        <AdsDropdown text="Сохранить объявление" selectList={dropdownCallbacks} />
+        <AdsDropdown text="Сохранить все объявления" selectList={dropdownCallbacks} />
       </div>
     </div>
   );
