@@ -1,6 +1,7 @@
 import "./AdsShow.css";
 import { useSelector } from "react-redux";
 import { FIELDS_PARAMS } from "../fieldsParams";
+import { useSavingAds } from "../customHooks/useSavingAds";
 import AdsShowCallouts from "./AdsShowCallouts";
 import AdsShowSitelinks from "./AdsShowSitelinks";
 import AdsShowTitle from "./AdsShowTitle";
@@ -8,7 +9,8 @@ import AdsDropdown from "../AdsDropdown";
 
 export default function AdsShow(props) {
   const { adId } = props;
-  const data = useSelector((state) => state.adForm[adId]);
+  const allData = useSelector((state) => state.adForm);
+  const data = allData[adId];
 
   // обрезаем значение под ограничение длины
   const cutString = (field, index, subfield) => {
@@ -37,26 +39,6 @@ export default function AdsShow(props) {
     const domain = url.match(/^(?:https?:\/\/)?(?:www\.)?([^:/?=]+)/i);
     return domain ? domain[1] : "yandex.ru";
   };
-
-  const textCopy = () => {
-    navigator.clipboard.writeText('Full ads');
-  }
-
-  const dropdownCallbacks = [
-    {
-      text: "Скопировать как текст",
-      success: "Текст скопирован в буфер обмена",
-      callback: textCopy,
-    },
-    {
-      text: "Сохранить в виде ссылки",
-      callback: () => console.log('save link'),
-    },
-    {
-      text: "Скачать в csv-формате",
-      callback: () => console.log('download csv'),
-    },
-  ];
 
   return (
     <div className="AdsShow">
@@ -91,8 +73,8 @@ export default function AdsShow(props) {
         <AdsShowSitelinks sitelinks={data.sitelink} />
       </div>
       <div className="AdsShow__wrapper-dropdowns">
-        <AdsDropdown text="Сохранить объявление" selectList={dropdownCallbacks} />
-        <AdsDropdown text="Сохранить все объявления" selectList={dropdownCallbacks} />
+        <AdsDropdown text="Сохранить объявление" selectList={useSavingAds([data])} />
+        <AdsDropdown text="Сохранить все объявления" selectList={useSavingAds([...allData])} />
       </div>
     </div>
   );

@@ -202,3 +202,10 @@
   margin-top: 20px;
   gap: 20px;
 }
+
+@media (max-width: 1225px) {
+  .AdsShow {
+    width: 100%;
+    max-width: 580px;
+  }
+}

@@ -5,4 +5,4 @@ export function useCheckVal (field, rule) {
     field = field.replace(rule.reg, "");
   }
   return field.length <= rule.length;
-};
+}

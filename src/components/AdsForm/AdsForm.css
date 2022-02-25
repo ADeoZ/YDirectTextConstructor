@@ -170,3 +170,10 @@
   color: rgb(242, 13, 13);
   border-color: rgb(242, 13, 13);
 }
+
+@media (max-width: 1225px) {
+  .AdsForm {
+    flex-shrink: 1;
+    margin-right: 0;
+  }
+}

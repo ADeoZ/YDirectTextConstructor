@@ -13,5 +13,20 @@
 
 .AdsWrapper__right_column {
   width: 100%;
-  min-width: 580px;
+}
+
+@media (max-width: 1225px) {
+  .AdsWrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .AdsWrapper__left_column {
+    display: none;
+  }
+
+  .AdsWrapper__right_column {
+    display: flex;
+    justify-content: center;
+  }
 }
