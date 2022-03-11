@@ -37,87 +37,87 @@ export function generateText(ads) {
         }
       });
     });
-    text += "ВСЕ ОБЪЯВЛЕНИЯ:\n";
+    text += "ВСЕ ОБЪЯВЛЕНИЯ:\r\n";
     if (headers.size) {
-      text += `Основные заголовки соответствуют запросам, например:\n`;
-      text += [...headers].join("\n");
-      text += "\n\n";
+      text += `Основные заголовки соответствуют запросам, например:\r\n`;
+      text += [...headers].join("\r\n");
+      text += "\r\n\r\n";
     }
     if (extraheaders.size) {
-      text += `Дополнительные заголовки (${extraheaders.size} ${сountableEndings(extraheaders.size, ['вариантов', 'варианта', 'вариант'])}):\n`;
-      text += [...extraheaders].join("\n");
-      text += "\n\n";
+      text += `Дополнительные заголовки (${extraheaders.size} ${сountableEndings(extraheaders.size, ['вариантов', 'варианта', 'вариант'])}):\r\n`;
+      text += [...extraheaders].join("\r\n");
+      text += "\r\n\r\n";
     }
     if (texts.size) {
-      text += `Тексты объявлений (${texts.size} ${сountableEndings(texts.size, ['вариантов', 'варианта', 'вариант'])}):\n`;
-      text += [...texts].join("\n");
-      text += "\n\n";
+      text += `Тексты объявлений (${texts.size} ${сountableEndings(texts.size, ['вариантов', 'варианта', 'вариант'])}):\r\n`;
+      text += [...texts].join("\r\n");
+      text += "\r\n\r\n";
     }
     if (urls.size) {
-      text += `Целевые ссылки (${urls.size} ${сountableEndings(urls.size, ['вариантов', 'варианта', 'вариант'])}):\n`;
-      text += [...urls].join("\n");
-      text += "\n\n";
+      text += `Целевые ссылки (${urls.size} ${сountableEndings(urls.size, ['вариантов', 'варианта', 'вариант'])}):\r\n`;
+      text += [...urls].join("\r\n");
+      text += "\r\n\r\n";
     }
     if (showurls.size) {
-      text += `Отображаемые ссылки (${showurls.size} ${сountableEndings(showurls.size, ['вариантов', 'варианта', 'вариант'])}):\n`;
-      text += [...showurls].join("\n");
-      text += "\n\n";
+      text += `Отображаемые ссылки (${showurls.size} ${сountableEndings(showurls.size, ['вариантов', 'варианта', 'вариант'])}):\r\n`;
+      text += [...showurls].join("\r\n");
+      text += "\r\n\r\n";
     }
     if (callouts.length) {
-      text += `Уточнения (${callouts.length} ${сountableEndings(callouts.length, ['вариантов', 'варианта', 'вариант'])}):\n`;
-      text += callouts.join("\n");
-      text += "\n\n";
+      text += `Уточнения (${callouts.length} ${сountableEndings(callouts.length, ['вариантов', 'варианта', 'вариант'])}):\r\n`;
+      text += callouts.join("\r\n");
+      text += "\r\n\r\n";
     }
     if (sitelinks.length) {
-      text += `Быстрые ссылки (${sitelinks.length} ${сountableEndings(sitelinks.length, ['вариантов', 'варианта', 'вариант'])}):\n`;
+      text += `Быстрые ссылки (${sitelinks.length} ${сountableEndings(sitelinks.length, ['вариантов', 'варианта', 'вариант'])}):\r\n`;
       sitelinks.forEach((sitelink, index) => {
-        text += `${index + 1}.\n`;
-        text += sitelink.name + "\n";
-        text += sitelink.link ? sitelink.link + "\n" : "";
-        text += sitelink.descr ? sitelink.descr + "\n" : "";
+        text += `${index + 1}.\r\n`;
+        text += sitelink.name + "\r\n";
+        text += sitelink.link ? sitelink.link + "\r\n" : "";
+        text += sitelink.descr ? sitelink.descr + "\r\n" : "";
       });
-      text += "\n";
+      text += "\r\n";
     }
-    text += "-------------------------------------\n";
-    text += "ОТДЕЛЬНЫЕ ОБЪЯВЛЕНИЯ:\n";
+    text += "-------------------------------------\r\n";
+    text += "ОТДЕЛЬНЫЕ ОБЪЯВЛЕНИЯ:\r\n";
   }
 
   // отдельные объявления
   ads.forEach((ad) => {
-    text += "Основной заголовок:\n";
-    text += ad.header ? ad.header + "\n\n" : "—\n\n";
+    text += "Основной заголовок:\r\n";
+    text += ad.header ? ad.header + "\r\n\r\n" : "—\r\n\r\n";
     if (ad.extraheader) {
-      text += "Дополнительный заголовок:\n";
-      text += ad.extraheader + "\n\n";
+      text += "Дополнительный заголовок:\r\n";
+      text += ad.extraheader + "\r\n\r\n";
     }
-    text += "Текст объявления:\n";
-    text += ad.text ? ad.text + "\n\n" : "—\n\n";
-    text += "Целевая ссылка:\n";
-    text += ad.url ? ad.url + "\n\n" : "—\n\n";
+    text += "Текст объявления:\r\n";
+    text += ad.text ? ad.text + "\r\n\r\n" : "—\r\n\r\n";
+    text += "Целевая ссылка:\r\n";
+    text += ad.url ? ad.url + "\r\n\r\n" : "—\r\n\r\n";
     if (ad.showurl) {
-      text += "Отображаемая ссылка:\n";
-      text += ad.showurl + "\n\n";
+      text += "Отображаемая ссылка:\r\n";
+      text += ad.showurl + "\r\n\r\n";
     }
     const callouts = ad.callout.filter((callout) => callout.length > 0);
     if (callouts.length) {
-      text += "Уточнения:\n";
+      text += "Уточнения:\r\n";
       callouts.forEach((callout) => {
-        text += callout + "\n";
+        text += callout + "\r\n";
       });
-      text += "\n";
+      text += "\r\n";
     }
     const sitelinks = ad.sitelink.filter((sitelink) => sitelink.name.length > 0);
     if (sitelinks.length) {
-      text += "Быстрые ссылки:\n";
+      text += "Быстрые ссылки:\r\n";
       sitelinks.forEach((sitelink, index) => {
-        text += `№${index + 1}\n`;
-        text += sitelink.name + "\n";
-        text += sitelink.link ? sitelink.link + "\n" : "";
-        text += sitelink.descr ? sitelink.descr + "\n" : "";
+        text += `№${index + 1}\r\n`;
+        text += sitelink.name + "\r\n";
+        text += sitelink.link ? sitelink.link + "\r\n" : "";
+        text += sitelink.descr ? sitelink.descr + "\r\n" : "";
       });
-      text += "\n";
+      text += "\r\n";
     }
-    text += "-------------------------------------\n";
+    text += "-------------------------------------\r\n";
   });
 
   return text;
