@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createPlainObj } from "../components/customHooks/func/createPlainObj";
 
 // поля объявления
 const initialForm = {
@@ -22,27 +23,12 @@ const initialForm = {
 
 const initialState = [];
 
+// запрос на сохранение объявлений
 export const saveAds = createAsyncThunk("adForm/saveAds", async (_, { getState }) => {
+  // преобразуем объекты объявлений в плоский вид
   const ads = getState().adForm.map((ad) => {
-    return Object.entries(ad).reduce((plainAd, field) => {
-      if (Array.isArray(field[1])) {
-        field[1].forEach((fieldValue, index) => {
-          if (fieldValue instanceof Object && fieldValue !== null) {
-            for (const key in fieldValue) {
-              fieldValue[key] && (plainAd[`${field[0]}_${index + 1}_${key}`] = fieldValue[key]);
-            }
-          } else {
-            fieldValue && (plainAd[`${field[0]}_${index + 1}`] = fieldValue);
-          }
-        });
-      } else {
-        field[1] && (plainAd[`${field[0]}`] = field[1]);
-      }
-      return plainAd;
-    }, {});
+    return createPlainObj(ad);
   });
-  console.log("ads", JSON.stringify({ ads }));
-
   const response = await fetch(`${process.env.REACT_APP_API_URL}/api/ads/post.php`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -52,11 +38,31 @@ export const saveAds = createAsyncThunk("adForm/saveAds", async (_, { getState }
   return data;
 });
 
+// запрос на получение бъявлений
 export const getAds = createAsyncThunk("adForm/getAds", async (link) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/api/ads/get.php?link=${link}`);
   const data = await response.json();
   return data;
 });
+
+// парсинг и запись значений в форму объявления
+const parseValue = (adObject, name, value) => {
+  const compName = name.split("_");
+  // если это значения в массив
+  if (compName[1]) {
+    // если это массив sitelink
+    if (compName[2]) {
+      adObject[compName[0]][compName[1]][compName[2]] = value || "";
+    }
+    // если это массив callout
+    else {
+      adObject[compName[0]][compName[1]] = value || "";
+    }
+  } else {
+    adObject[name] = value || "";
+  }
+  return adObject;
+}
 
 const adFormSlice = createSlice({
   name: "adForm",
@@ -69,30 +75,22 @@ const adFormSlice = createSlice({
     // изменение поля объявления
     changeField: (state, action) => {
       const { adId, name, value } = action.payload;
-      const compName = name.split("_");
-      // если это значения в массив
-      if (compName[1]) {
-        // если это массив sitelink
-        if (compName[2]) {
-          state[adId][compName[0]][compName[1]][compName[2]] = value;
-        }
-        // если это массив callout
-        else {
-          state[adId][compName[0]][compName[1]] = value;
-        }
-      } else {
-        state[adId][name] = value;
-      }
+      parseValue(state[adId], name, value);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getAds.fulfilled, (state, action) => {
       const { ads } = action.payload;
-      ads.forEach((ad) => {
-        
-      });
-      state.push(...action.payload.ads);
-      console.log(state);
+      if (ads && ads.length) {
+        const formattedAds = ads.reduce((res, ad, index) => {
+          res[index] = JSON.parse(JSON.stringify(initialForm)); // здесь нужно глубокое клонирование
+          for (const field in ad) {
+            parseValue(res[index], field, ad[field]);
+          }
+          return res;
+        }, []);
+        state.push(...formattedAds);
+      }
     });
   },
 });

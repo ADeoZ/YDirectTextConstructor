@@ -27,6 +27,10 @@
   color: #ffffff;
 }
 
+.AdsDropdown__button--status-error {
+  background: #eb0000;
+}
+
 .AdsDropdown__button::after {
   content: "";
   position: absolute;
@@ -53,6 +57,10 @@
 
 .AdsDropdown__button--status:hover {
   background: #498bff;
+}
+
+.AdsDropdown__button--status-error:hover {
+  background: #eb0000;
 }
 
 .AdsDropdown__list {

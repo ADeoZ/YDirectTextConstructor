@@ -16,8 +16,7 @@ export default function AdsDropdown({ text, selectList }) {
   }
 
   const handleItemClick = (callback, success) => {
-    callback();
-    setStatus(success);
+    callback().then((result) => setStatus(result));
     setTimeout(() => setStatus(null), 3000);
   }
 
@@ -31,10 +30,11 @@ export default function AdsDropdown({ text, selectList }) {
           {
             "AdsDropdown__button--selected": selected,
             "AdsDropdown__button--status": status,
+            "AdsDropdown__button--status-error": status && status.status === "error",
           })}
         onClick={handleClick}
       >
-        {status || text}
+        {status ? status.message : text}
       </button>
       {selected &&
         <ul className="AdsDropdown__list">
