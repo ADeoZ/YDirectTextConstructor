@@ -62,7 +62,7 @@ const parseValue = (adObject, name, value) => {
     adObject[name] = value || "";
   }
   return adObject;
-}
+};
 
 const adFormSlice = createSlice({
   name: "adForm",
@@ -72,10 +72,17 @@ const adFormSlice = createSlice({
     addEmptyAd: (state) => {
       state.push(initialForm);
     },
+    // дублирование предыдущего объявления
+    copyLastAd: (state) => {
+      state.push(state[state.length - 1]);
+    },
     // изменение поля объявления
     changeField: (state, action) => {
       const { adId, name, value } = action.payload;
       parseValue(state[adId], name, value);
+    },
+    deleteAd: (state, action) => {
+      return state.filter((_, index) => index !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -95,5 +102,5 @@ const adFormSlice = createSlice({
   },
 });
 
-export const { addEmptyAd, changeField } = adFormSlice.actions;
+export const { addEmptyAd, copyLastAd, changeField, deleteAd } = adFormSlice.actions;
 export default adFormSlice.reducer;

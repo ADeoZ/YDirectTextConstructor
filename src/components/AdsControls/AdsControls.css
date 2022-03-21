@@ -1,0 +1,14 @@
+.AdsControls {
+  align-self: center;
+  display: flex;
+  width: 100%;
+  max-width: 620px;
+  gap: 15px;
+}
+
+@media (max-width: 1225px) {
+  .AdsControls {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}

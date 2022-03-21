@@ -1,0 +1,7 @@
+svg.AdsDelete__trash {
+  fill: black;
+  cursor: pointer;
+}
+svg.AdsDelete__trash:hover {
+  fill: #eb0000;
+}

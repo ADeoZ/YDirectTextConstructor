@@ -1,12 +1,13 @@
+import classNames from "classnames";
 import "./AdsButton.css";
 
-export default function AdsButton({ text, callback }) {
+export default function AdsButton({ text, callback, simple = false }) {
   const handleClick = () => {
     callback();
   };
 
   return (
-    <button className="AdsButton" onClick={handleClick}>
+    <button className={classNames("AdsButton", { "AdsButton-simple": simple })} onClick={handleClick}>
       {text}
     </button>
   );

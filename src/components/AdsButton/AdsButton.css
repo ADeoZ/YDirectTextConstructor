@@ -1,8 +1,9 @@
 .AdsButton {
+  box-sizing: border-box;
   width: 100%;
   max-width: 620px;
   padding: 10px 15px;
-  border: 0;
+  border: 0px;
   border-radius: 4px;
   background: linear-gradient(0deg, #ffcc3f, #ffcc00);
   align-self: center;
@@ -18,5 +19,15 @@
 }
 
 .AdsButton:focus {
-    outline: 1px solid #001d9e;
+  outline: 1px solid #001d9e;
+}
+
+.AdsButton-simple {
+  background: none;
+  box-shadow:inset 0px 0px 0px 2px #fdc220;
+}
+
+.AdsButton-simple:hover {
+  background: none;
+  box-shadow:inset 0px 0px 0px 2px #498bff;
 }

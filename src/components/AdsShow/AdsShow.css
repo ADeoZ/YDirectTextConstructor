@@ -25,6 +25,13 @@
 
 .AdsShow h2 {
   font-weight: normal;
+  margin: 0;
+}
+
+.AdsShow__header {
+  display: flex;  
+  justify-content: space-between;
+  align-items: center;
   margin: 0 0 20px 10px;
 }
 

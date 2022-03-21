@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addEmptyAd, getAds } from "../reducers/adFormSlice";
 import AdsWrapper from "./AdsWrapper";
-import AdsButton from "./AdsButton";
+import AdsControls from "./AdsControls";
+
 
 export default function Constructor() {
   const ads = useSelector((state) => state.adForm);
@@ -14,7 +15,7 @@ export default function Constructor() {
   // создаём первичное пустое объявление
   useEffect(() => {
     if (params.link) {
-      dispatch(getAds(params.link));      
+      dispatch(getAds(params.link));
     } else {
       dispatch(addEmptyAd());
     }
@@ -22,13 +23,10 @@ export default function Constructor() {
 
   return (
     <main className="Constructor">
-      {ads.map((_, index) =>
+      {ads.map((_, index) => (
         <AdsWrapper id={index} key={index} />
-      )}
-      <AdsButton
-        text="Добавить объявление"
-        callback={() => dispatch(addEmptyAd())}
-      />
+      ))}
+      <AdsControls />
     </main>
   );
 }

@@ -6,6 +6,7 @@ import AdsShowCallouts from "./AdsShowCallouts";
 import AdsShowSitelinks from "./AdsShowSitelinks";
 import AdsShowTitle from "./AdsShowTitle";
 import AdsDropdown from "../AdsDropdown";
+import AdsDelete from "../AdsDelete";
 
 export default function AdsShow(props) {
   const { adId } = props;
@@ -42,7 +43,10 @@ export default function AdsShow(props) {
 
   return (
     <div className="AdsShow">
-      <h2>Объявление №{adId + 1}</h2>
+      <div className="AdsShow__header">
+        <h2>Объявление №{adId + 1}</h2>
+        <AdsDelete adId={adId}/>
+      </div>
       <div className="AdsShow__wrapper">
         <h3 className="AdsShow__title">
           <a className="AdsShow__title-link" href="#plug">
