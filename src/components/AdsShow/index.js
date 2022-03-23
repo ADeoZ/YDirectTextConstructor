@@ -42,11 +42,11 @@ export default function AdsShow(props) {
   };
 
   return (
-    <div className="AdsShow">
-      <div className="AdsShow__header">
+    <section className="AdsShow">
+      <header className="AdsShow__header">
         <h2>Объявление №{adId + 1}</h2>
         <AdsDelete adId={adId}/>
-      </div>
+      </header>
       <div className="AdsShow__wrapper">
         <h3 className="AdsShow__title">
           <a className="AdsShow__title-link" href="#plug">
@@ -80,6 +80,6 @@ export default function AdsShow(props) {
         <AdsDropdown text="Сохранить объявление" selectList={useSavingAds([data])} />
         <AdsDropdown text="Сохранить все объявления" selectList={useSavingAds([...allData])} />
       </div>
-    </div>
+    </section>
   );
 }
