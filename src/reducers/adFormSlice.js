@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import FileSaver from "file-saver";
 import { createPlainObj } from "../components/customHooks/func/createPlainObj";
 
 // поля объявления
@@ -23,8 +24,8 @@ const initialForm = {
 
 const initialState = [];
 
-// запрос на сохранение объявлений
-export const saveAds = createAsyncThunk("adForm/saveAds", async (_, { getState }) => {
+// запрос на сохранение объявлений по ссылке
+export const saveLink = createAsyncThunk("adForm/saveLink", async (_, { getState }) => {
   // преобразуем объекты объявлений в плоский вид
   const ads = getState().adForm.map((ad) => {
     return createPlainObj(ad);
@@ -36,6 +37,25 @@ export const saveAds = createAsyncThunk("adForm/saveAds", async (_, { getState }
   });
   const data = await response.json();
   return data;
+});
+
+// запрос на сохранение объявлений в виде файла xlsx
+export const saveFile = createAsyncThunk("adForm/saveFile", async (_, { getState, rejectWithValue }) => {
+  // преобразуем объекты объявлений в плоский вид
+  const ads = getState().adForm.map((ad) => {
+    return createPlainObj(ad);
+  });
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/ads/file.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ads }),
+    });
+    const blob = await response.blob();
+    FileSaver.saveAs(blob, "AdsPreview.xlsx");
+  } catch (error) {
+    return rejectWithValue();
+  }
 });
 
 // запрос на получение бъявлений
