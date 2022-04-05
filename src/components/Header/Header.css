@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0 20px;
+  margin-bottom: 15px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #ffffff;
+}
+
+.header h1 {
+  font-size: 22px;
+  margin: 0px;
+  line-height: 25px;
+  color: rgb(47, 55, 71);
+}

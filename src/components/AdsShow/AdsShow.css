@@ -9,13 +9,18 @@
 }
 
 .AdsShow {
+  margin-bottom: 10px;
+  padding: 15px 8px 20px 5px;
+  width: 580px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.AdsWrapper__right_column .AdsShow {
   position: sticky;
   top: 15px;
-  margin-bottom: 10px;
-  padding-top: 10px;
-  width: 580px;
-  box-sizing: border-box;
   flex-shrink: 0;
+  margin-bottom: 0px;
 }
 
 .AdsShow b {
@@ -29,7 +34,7 @@
 }
 
 .AdsShow__header {
-  display: flex;  
+  display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 0 20px 10px;
@@ -38,7 +43,7 @@
 .AdsShow__wrapper {
   padding: 20px 10px 20px 32px;
   border: 1px solid rgba(0, 26, 128, 0.1);
-  box-shadow: 3px 4px 8px 0px rgba(34, 60, 80, 0.2);  
+  box-shadow: 3px 4px 8px 0px rgba(34, 60, 80, 0.2);
   font-family: 'YD Regular', Arial, Helvetica, sans-serif;
 }
 

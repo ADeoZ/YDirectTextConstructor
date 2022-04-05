@@ -1,18 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #eff2f7;
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
-h1 {
-  font-size: 22px;
-  margin: 0px;
-  line-height: 25px;
-  color: rgb(47, 55, 71);
+button, input {
+  font-family: inherit;
 }
 
 footer.cr a {
@@ -28,4 +23,3 @@ footer.cr a {
 footer.cr:hover a::first-letter {
   color: red;
 }
-

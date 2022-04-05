@@ -26,7 +26,7 @@ export function useSavingAds(ads) {
     }
     return dispatch(saveLink())
       .then((res) => {
-        const link = window.location.origin + "/" + res.payload.link;
+        const link = window.location.origin + "/preview/" + res.payload.link;
         return navigator.clipboard.writeText(link);
       })
       .then(() => ({ status: "success", message: "Ссылка скопирована" }))

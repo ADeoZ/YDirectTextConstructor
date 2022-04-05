@@ -2,8 +2,9 @@
   align-self: center;
   display: flex;
   width: 100%;
-  max-width: 620px;
+  max-width: 615px;
   gap: 15px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 1225px) {

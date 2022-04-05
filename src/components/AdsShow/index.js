@@ -1,15 +1,13 @@
 import "./AdsShow.css";
 import { useSelector } from "react-redux";
 import { FIELDS_PARAMS } from "../fieldsParams";
-import { useSavingAds } from "../customHooks/useSavingAds";
 import AdsShowCallouts from "./AdsShowCallouts";
 import AdsShowSitelinks from "./AdsShowSitelinks";
 import AdsShowTitle from "./AdsShowTitle";
 import AdsDropdown from "../AdsDropdown";
 import AdsDelete from "../AdsDelete";
 
-export default function AdsShow(props) {
-  const { adId } = props;
+export default function AdsShow({ adId, controls = true }) {
   const allData = useSelector((state) => state.adForm);
   const data = allData[adId];
 
@@ -45,7 +43,7 @@ export default function AdsShow(props) {
     <section className="AdsShow">
       <header className="AdsShow__header">
         <h2>Объявление №{adId + 1}</h2>
-        <AdsDelete adId={adId}/>
+        {controls && <AdsDelete adId={adId} />}
       </header>
       <div className="AdsShow__wrapper">
         <h3 className="AdsShow__title">
@@ -76,10 +74,12 @@ export default function AdsShow(props) {
         </div>
         <AdsShowSitelinks sitelinks={data.sitelink} />
       </div>
-      <div className="AdsShow__wrapper-dropdowns">
-        <AdsDropdown text="Сохранить объявление" selectList={useSavingAds([data])} />
-        <AdsDropdown text="Сохранить все объявления" selectList={useSavingAds([...allData])} />
-      </div>
+      {controls && (
+        <div className="AdsShow__wrapper-dropdowns">
+          <AdsDropdown text="Сохранить объявление" ads={[data]} />
+          <AdsDropdown text="Сохранить все объявления" ads={[...allData]} />
+        </div>
+      )}
     </section>
   );
 }

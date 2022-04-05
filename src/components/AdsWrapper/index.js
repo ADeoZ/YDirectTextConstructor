@@ -10,7 +10,7 @@ export default function AdsWrapper(props) {
       <div className="AdsWrapper__left_column" />
       <AdsForm adId={id} />
       <div className="AdsWrapper__right_column">        
-        <AdsShow adId={id} />
+        <AdsShow adId={id} className="AdsShow-scticky"/>
       </div>
     </div>
   );

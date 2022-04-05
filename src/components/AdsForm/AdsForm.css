@@ -1,10 +1,11 @@
 .AdsForm {
   flex-shrink: 0;
-  width: 615px;
+  box-sizing: border-box;
+  width: 615px;  
+  border-radius: 12px;
+  margin-right: 3px;
+  padding: 15px 7px 20px 5px;  
   background-color: #ffffff;
-  border-top: 2px solid #1a2b4d99;
-  padding-top: 10px;
-  margin-right: 5px;
 }
 
 .AdsForm__header {

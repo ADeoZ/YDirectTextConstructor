@@ -104,6 +104,7 @@ const adFormSlice = createSlice({
     deleteAd: (state, action) => {
       return state.filter((_, index) => index !== action.payload);
     },
+    resetAds: () => [initialForm],
   },
   extraReducers: (builder) => {
     builder.addCase(getAds.fulfilled, (state, action) => {
@@ -122,5 +123,5 @@ const adFormSlice = createSlice({
   },
 });
 
-export const { addEmptyAd, copyLastAd, changeField, deleteAd } = adFormSlice.actions;
+export const { addEmptyAd, copyLastAd, changeField, deleteAd, resetAds } = adFormSlice.actions;
 export default adFormSlice.reducer;

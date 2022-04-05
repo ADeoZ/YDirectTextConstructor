@@ -1,10 +1,14 @@
 import "./AdsDropdown.css";
 import { useState } from "react";
 import classNames from "classnames/bind";
+import { useSavingAds } from "../customHooks/useSavingAds";
 
-export default function AdsDropdown({ text, selectList }) {
+export default function AdsDropdown({ text, ads }) {
   const [selected, setSelected] = useState(false);
   const [status, setStatus] = useState(null);
+
+  // создаём список методов для обработки объявлений
+  const selectList = useSavingAds(ads);
 
   // потеря фокуса (срабатывает при клике и при переключении через tab)
   const handleBlur = () => {

@@ -1,13 +1,11 @@
-import "./Constructor.css";
+import "./AdsPreview.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addEmptyAd, getAds } from "../reducers/adFormSlice";
-import AdsWrapper from "./AdsWrapper";
-import AdsControls from "./AdsControls";
+import AdsShow from "../AdsShow";
+import { getAds } from "../../reducers/adFormSlice";
 
-
-export default function Constructor() {
+export default function AdsPreview() {
   const ads = useSelector((state) => state.adForm);
   const dispatch = useDispatch();
   let params = useParams();
@@ -16,17 +14,14 @@ export default function Constructor() {
   useEffect(() => {
     if (params.link) {
       dispatch(getAds(params.link));
-    } else {
-      dispatch(addEmptyAd());
     }
   }, [params.link, dispatch]);
 
   return (
-    <main className="Constructor">
+    <main className="AdsPreview">
       {ads.map((_, index) => (
-        <AdsWrapper id={index} key={index} />
+        <AdsShow adId={index} controls={false} key={index} />
       ))}
-      <AdsControls />
     </main>
   );
 }
