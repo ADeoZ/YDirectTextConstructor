@@ -34,18 +34,18 @@
 
 ### Скриншоты
 
-| ![Создание объявления](https://github.com/ADeoZ/YDirectTextConstructor/blob/master/readme_pic/1_create_ad.png) |
+| ![Создание объявления](https://raw.githubusercontent.com/ADeoZ/YDirectTextConstructor/master/readme_pic/1_create_ad.png) |
 |:--:|
 | *Создание объявления* |
 
-| ![Режим предпросмотра](https://github.com/ADeoZ/YDirectTextConstructor/blob/master/readme_pic/2_preview.png) |
+| ![Режим предпросмотра](https://raw.githubusercontent.com/ADeoZ/YDirectTextConstructor/master/readme_pic/2_preview.png) |
 |:--:|
 | *Режим предпросмотра* |
 
-| ![Ошибка длины](https://github.com/ADeoZ/YDirectTextConstructor/blob/master/readme_pic/3_errors_length.png) |
+| ![Ошибка длины](https://raw.githubusercontent.com/ADeoZ/YDirectTextConstructor/master/readme_pic/3_errors_length.png) |
 |:--:|
 | *Предупреждение о превышении ограничений по длине полей* |
 
-| ![Ошибка символов](https://github.com/ADeoZ/YDirectTextConstructor/blob/master/readme_pic/4_errors_forbidden.png) |
+| ![Ошибка символов](https://raw.githubusercontent.com/ADeoZ/YDirectTextConstructor/master/readme_pic/4_errors_forbidden.png) |
 |:--:|
 | *Предупреждение об использовании недопустимых символов* |
